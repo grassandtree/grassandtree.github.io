@@ -1,6 +1,9 @@
 ---
 layout: post
 title:  "AI 나무의사 시험 튜터 활용 가이드"
+layout: default  # single
+# categories:
+# tags:
 ---
 
 # AI 나무의사 시험 튜터 활용 가이드 🌳📝
