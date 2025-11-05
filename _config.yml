@@ -119,9 +119,9 @@ author:
   location         : "경기, 서울"
   email            : "fabian@kakao.com"
   links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:fabian@kakao.com"
+    # - label: "Email"
+    #   icon: "fas fa-fw fa-envelope-square"
+    #   url: "mailto:fabian@kakao.com"
     # - label: "Website"
     #   icon: "fas fa-fw fa-link"
     #   # url: "https://your-website.com"
@@ -319,7 +319,7 @@ defaults:
       path: ""
       type: posts
     values:
-      layout: default #single
+      layout: single # default
       author_profile: # true
       read_time: # true
       comments: # true
