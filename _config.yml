@@ -20,7 +20,7 @@ rtl                      : "false" #, false (default) # turns direction of the p
 title                    : "tree doctor candidate"
 title_separator          : "|"
 subtitle                 : "version 0.0.1" # site tagline that appears below site title in masthead
-name                     : "풀과나무"
+name                     : "나무"
 description              : "나무 의사 시험 관련 정보와 공부 팁을 공유합니다."
 url                      : "https://grassandtree.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
