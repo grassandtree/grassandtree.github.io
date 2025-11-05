@@ -16,7 +16,7 @@ minimal_mistakes_skin    : "dark" # "default, "air", "aqua", "contrast", "dark",
 
 # Site Settings
 locale                   : "ko-KR"
-rtl                      : "true" #, false (default) # turns direction of the page into right to left for RTL languages
+rtl                      : "false" #, false (default) # turns direction of the page into right to left for RTL languages
 title                    : "tree doctor candidate"
 title_separator          : "|"
 subtitle                 : "version 0.0.1" # site tagline that appears below site title in masthead
