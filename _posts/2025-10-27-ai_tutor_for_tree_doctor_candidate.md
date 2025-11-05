@@ -11,10 +11,12 @@ title:  "AI 나무의사 시험 튜터 활용 가이드"
 
 ![샘플문제1](files\2025-10-27\sample_problem_1.jpg)
 ![샘플문제1해설](files\2025-10-27\sample_explain_1.jpg)
+
 ---
 
 ![샘플문제2](files\2025-10-27\sample_problem_2.jpg)
 ![샘플문제2해설](files\2025-10-27\sample_explain_2.jpg)
+
 ---
 
 아래 단계를 따라 AI를 효과적인 시험 준비 도우미로 설정하고 활용해 보세요.
