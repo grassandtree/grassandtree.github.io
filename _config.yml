@@ -10,27 +10,30 @@
 # Review documentation to determine if you should use `theme` or `remote_theme`
 # https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/#installing-the-theme
 
-# theme                  : "minimal-mistakes-jekyll"
+theme                    : "minimal-mistakes-jekyll"
 # remote_theme           : "mmistakes/minimal-mistakes"
 minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "ko-KR"
 rtl                      : # true, false (default) # turns direction of the page into right to left for RTL languages
-title                    : "tree doctor candidate"
-title_separator          : "-"
-subtitle                 : # site tagline that appears below site title in masthead
-name                     : "나무"
-description              : "나무 의사 지원자를 위한 블로그"
+title                    : "blog"
+title_separator          : "|"
+subtitle                 : "attractive dream" # site tagline that appears below site title in masthead
+name                     : "blog"
+description              : "블로그"
 url                      : "http://grassandtree.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
-breadcrumbs              : # true, false (default)
-words_per_minute         : 200
-enable_copy_code_button  : # true, false (default)
+breadcrumbs              : true # true, false (default)
+breadcrumb_home_label    : "Home"
+breadcrumb_separator     : "/"
+date_format              : "%Y-%m-%d"
+words_per_minute         : 250
+enable_copy_code_button  : true  #false (default)
 copyright                : # "copyright" name, defaults to site.title
 copyright_url            : # "copyright" URL, defaults to site.url
 comments:
@@ -105,23 +108,23 @@ social:
 
 # Analytics
 analytics:
-  provider               : # false (default), "google", "google-universal", "google-gtag", "custom"
+  provider               : "google-gtag"  # false (default), "google", "google-universal", "google-gtag", "custom"
   google:
-    tracking_id          :
-    anonymize_ip         : # true, false (default)
+    tracking_id          : "G-DTBQR18SQK"
+    anonymize_ip         : false  # true, false (default)
 
 
 # Site Author
 author:
-  name             : "나무"
+  name             : "파비안(fabian)"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "나무 의사 지원자"
+  bio              : "데이터 엔지니어<br>나무의사 지원자<br>스마트팜 구경꾼<br>느릿한 산책꾼"
   location         : "경기, 서울"
-  email            : "fabian@kakao.com"
+  email            : # "fabian@kakao.com"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      # url: "mailto:your.name@email.com"
+      url: "mailto:fabian@kakao.com"
     - label: "Website"
       icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"
@@ -133,7 +136,7 @@ author:
       # url: "https://facebook.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url: "https://github.com/"
+      url: "https://github.com/grassandtree"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
@@ -149,7 +152,7 @@ footer:
       # url:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url:
+      url: "https://github.com/grassandtree"
     - label: "GitLab"
       icon: "fab fa-fw fa-gitlab"
       # url:
@@ -312,6 +315,11 @@ compress_html:
     envs: development
 
 
+collections:
+  portfolio:
+    output: true
+    permalink: /:collection/:path/
+
 # Defaults
 defaults:
   # _posts
@@ -325,3 +333,22 @@ defaults:
       comments: # true
       share: true
       related: true
+      show_date: true
+
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+
+  # _portfolio
+  - scope:
+      path: ""
+      type: portfolio
+    values:
+      layout: single
+      author_profile: false
+      share: true
+
