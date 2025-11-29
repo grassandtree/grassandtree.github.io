@@ -2,7 +2,7 @@
 layout: post
 title:  "나무의사와 관련된 법"
 layout: single
-# categories:
+categories: 나무의사
 # tags:
 ---
 
