@@ -16,7 +16,7 @@ layout: single
 
 ## 산림보호법
 
-https://www.law.go.kr/법령/산림보호법
+[국가법령정보센터>산림보호법](https://www.law.go.kr/법령/산림보호법)
 
 
 ### 산림보호법의 나무의사에 대한 정의
@@ -35,11 +35,11 @@ https://www.law.go.kr/법령/산림보호법
 
 ## 소나무재선충병 방제특별법
 
-https://www.law.go.kr/법령/농약관리법
+[국가법령정보센터>농약관리법](https://www.law.go.kr/법령/농약관리법)
 
 
 ## 농약관리법
 
-https://www.law.go.kr/법령/소나무재선충병방제특별법
+[국가법령정보센터>소나무재선충병 방제특별법](https://www.law.go.kr/법령/소나무재선충병방제특별법)
 
 

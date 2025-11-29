@@ -8,7 +8,7 @@ layout: single
 
 [산림청>2025년도 나무의사 자격시험 시행계획 공고](https://www.forest.go.kr/kfsweb/cop/bbs/selectBoardArticle.do?bbsId=BBSMSTR_1031&mn=NKFS_04_01_01&nttId=3201917)
 
-[2025년도 나무의사 자격시험 출제범위](../files/2025-10-29/2025년도_나무의사_자격시험_출제범위.pdf")
+[2025년도 나무의사 자격시험 출제범위](../files/2025-10-29/2025년도_나무의사_자격시험_출제범위.pdf)
 
 ## 1차 시험
 
