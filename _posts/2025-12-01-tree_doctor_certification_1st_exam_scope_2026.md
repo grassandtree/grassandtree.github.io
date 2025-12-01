@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "나무의사 자격시험 1차 시험 문제출제 범위 (2025년)"
+title:  "나무의사 자격시험 1차 시험 문제출제 범위 (2026년)"
 layout: single
 # categories:
 # tags:
