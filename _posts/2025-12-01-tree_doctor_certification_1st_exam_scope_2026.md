@@ -1,14 +1,26 @@
 ---
-layout: post
 title:  "나무의사 자격시험 1차 시험 문제출제 범위 (2026년)"
 layout: single
-# categories:
-# tags:
+categories: 나무의사
+tags: [나무의사, 출제범위, "2026"]
 ---
 
-[산림청>2026년도 나무의사 자격시험 시행계획 공고](https://www.forest.go.kr/kfsweb/cop/bbs/selectBoardArticle.do?nttId=3213532&bbsId=BBSMSTR_1031&mn=NKFS_04_01_01)
+> 이 글은 **2026년도 시험 기준**입니다. 다음 연도 시행계획이 공고되면 출제범위를 다시 확인하세요.
 
-[2026년도 나무의사 자격시험 출제범위](../files/2025-12-01/2026년도_나무의사_자격시험_출제범위.pdf) : 2025년도와 출제범위 동일, 2019년도 1회 1차 시험의 출제범위에서 큰 변경 없음
+[산림청>2026년도 나무의사 자격시험 시행계획 공고](https://www.forest.go.kr/kfsweb/cop/bbs/selectBoardArticle.do?nttId=3213532&bbsId=BBSMSTR_1031&mn=NKFS_04_01_01) : 출제범위 파일은 이 공고의 첨부파일에서 내려받을 수 있습니다. 2025년도와 출제범위가 같습니다.
+
+관련 법령은 [나무의사 시험 관련 법령 정리]({% post_url 2025-11-29-laws_of_tree_doctor %})에 정리했습니다.
+
+## 용어 참고 (Wikipedia)
+
+* 수목병리학: [Plant pathology](https://en.wikipedia.org/wiki/Plant_pathology)
+* 수목해충학: [Entomology](https://en.wikipedia.org/wiki/Entomology)
+* 수목생리학: [Plant physiology](https://en.wikipedia.org/wiki/Plant_physiology)
+* 산림토양학: [Soil science](https://en.wikipedia.org/wiki/Soil_science)
+* 수목관리학(수목 관리 전반): [Arboriculture](https://en.wikipedia.org/wiki/Arboriculture), 전정: [Pruning](https://en.wikipedia.org/wiki/Pruning), 외과수술: [Tree surgery](https://en.wikipedia.org/wiki/Tree_surgery)
+* 농약학: [Pesticide](https://en.wikipedia.org/wiki/Pesticide), 살균제: [Fungicide](https://en.wikipedia.org/wiki/Fungicide)
+* 소나무재선충병: [Pine wilt](https://en.wikipedia.org/wiki/Pine_wilt)
+* 나무의사: [Arborist](https://en.wikipedia.org/wiki/Arborist)
 
 
 ## 1차 시험
@@ -74,7 +86,8 @@ layout: single
 2.1.5.2. 수목해충의 방제
 2.1.5.3. 종합적 관리
 2.1.5.4. 기타
-2.1.6. 수목해충 1. 잎을 갉아먹는 해충
+2.1.6. 수목해충
+2.1.6.1. 잎을 갉아먹는 해충
 2.1.6.2. 즙액을 빨아먹는 해충
 2.1.6.3. 종실 및 구과에 피해를 주는 해충
 2.1.6.4. 벌레혹을 만드는 해충
@@ -286,7 +299,7 @@ layout: single
 5.1.10.2. 수목상처관리
 5.1.10.3. 공동관리
 5.1.10.4. 기타
-5.1.11.수목 건강관리
+5.1.11. 수목 건강관리
 5.1.11.1. 서론
 5.1.11.2. 정의와 기본정신
 5.1.11.3. 건강한 수목이란?
@@ -345,7 +358,7 @@ layout: single
 5.2.5. 기타
 
 5.3. 농약학
-5.3.1.농약학 서론
+5.3.1. 농약학 서론
 5.3.1.1. 농약의 정의 및 명칭
 5.3.1.2. 농약의 기능 및 중요성
 5.3.1.3. 기타

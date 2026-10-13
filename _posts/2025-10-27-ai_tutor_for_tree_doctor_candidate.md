@@ -1,33 +1,34 @@
 ---
-layout: post
 title:  "AI 나무의사 시험 튜터 활용 가이드 🌳📝"
-layout: single  # single
-# categories:
-# tags:
+layout: single
+published: false
+categories: 나무의사
+tags: [나무의사, AI, 프롬프트]
 ---
 
 ## 예제
 
-* 사용한 모델: gemini-2.5-pro, [gemini](https://gemini.google.com)
+* 사용한 모델: gemini-2.5-pro (작성 당시 기준. 최신 모델에서도 같은 방식으로 쓸 수 있습니다), [Gemini](https://gemini.google.com) · [Wikipedia: Gemini](https://en.wikipedia.org/wiki/Gemini_%28chatbot%29)
+* 용어: [대규모 언어 모델(LLM)](https://en.wikipedia.org/wiki/Large_language_model), [프롬프트 엔지니어링](https://en.wikipedia.org/wiki/Prompt_engineering)
 
 ---
 
-![샘플문제1](../files/2025-10-27/sample_problem_1.jpg)
-![샘플문제1해설](../files/2025-10-27/sample_explain_1.jpg)
+![샘플문제1](/files/2025-10-27/sample_problem_1.jpg)
+![샘플문제1해설](/files/2025-10-27/sample_explain_1.jpg)
 
 ---
 
-![샘플문제2](../files/2025-10-27/sample_problem_2.jpg)
-![샘플문제2해설](../files/2025-10-27/sample_explain_2.jpg)
+![샘플문제2](/files/2025-10-27/sample_problem_2.jpg)
+![샘플문제2해설](/files/2025-10-27/sample_explain_2.jpg)
 
 ---
 
-![샘플문제3](../files/2025-10-27/sample_problem_3.jpg)
-![샘플문제3해설](../files/2025-10-27/sample_explain_3.jpg)
+![샘플문제3](/files/2025-10-27/sample_problem_3.jpg)
+![샘플문제3해설](/files/2025-10-27/sample_explain_3.jpg)
 
 ---
 
-아래 단계를 따라 AI를 효과적인 험 준비 도우미로 설정하고 활용해 보세요.
+아래 단계를 따라 AI를 효과적인 시험 준비 도우미로 설정하고 활용해 보세요.
 
 ---
 
@@ -51,12 +52,12 @@ layout: single  # single
 ## **2단계: 학습 자료 제공 (선택 사항이지만 권장)**
 
 * 더 맞춤화된 문제를 원한다면 관련 자료를 업로드할 수 있습니다. 저는 다음 자료들을 제공했습니다:
-    * **과거 기출문제 파일:** 지난 나무의사 시험 문제(예: 5회~11회)가 포함된 PDF 파일을 업로드했습니다. 이를 통해 AI가 실제 기출문제를 직접 활용할 수 있습니다.
-    * **출제 범위 개요 파일:** 다양한 과목(예: 병리학, 해충학, 생리학, 토양학, 관리학)의 시험 출제 범위 개요가 담긴 파일을 업로드했습니다. 이는 AI가 문제의 카테고리를 분류하고 시험 범위를 이해하는 데 도움을 줍니다. [출제범위](../files/2025-10-27/scope.txt)
+    * **과거 기출문제 파일:** 지난 나무의사 시험 문제(예: 5회~11회. 가지고 있는 최신 회차까지 올리면 더 좋습니다)가 포함된 PDF 파일을 업로드했습니다. 이를 통해 AI가 실제 기출문제를 직접 활용할 수 있습니다.
+    * **출제 범위 개요 파일:** 다양한 과목(예: 병리학, 해충학, 생리학, 토양학, 관리학)의 시험 출제 범위 개요가 담긴 파일을 업로드했습니다. 이는 AI가 문제의 카테고리를 분류하고 시험 범위를 이해하는 데 도움을 줍니다. [출제범위](/files/2025-10-27/scope.txt) (2025년도 기준 파일입니다. 최신 범위는 [2026년 출제범위]({% post_url 2025-12-01-tree_doctor_certification_1st_exam_scope_2026 %})를 참고하세요)
 
 ---
 
-### **3단계: AI 해설 구체화 (심화)**
+## **3단계: AI 해설 구체화 (심화)**
 
 * 저는 AI의 해설을 개선하기 위해 다음과 같이 요청했습니다:
 
@@ -79,14 +80,14 @@ layout: single  # single
 
 ---
 
-### **5단계: 답변 및 해설 검토**
+## **5단계: 답변 및 해설 검토**
 
 * 선택한 답의 번호를 입력하세요.
 * AI는 정답 여부를 알려주고, 1단계에서 요청한 상세 해설을 제공할 것입니다.
 
 ---
 
-### **6단계: 학습 계속하기**
+## **6단계: 학습 계속하기**
 
 * 해설 검토 후, AI의 질문("다음 문제를 출제할까요?")에 답하여 세션을 계속 진행하세요 (예: "ㅇㅋ" 또는 "다음").
 
