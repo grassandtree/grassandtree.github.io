@@ -8,7 +8,7 @@
 
 * [minimal-mistakes](https://github.com/mmistakes/minimal-mistakes) 를 fork 하였습니다.
 
-* github 에서 실행됩니다. [GitHub Pages](https://pages.github.com/)
+* github 에서 실행됩니다. [GitHub Pages](https://pages.github.com/) (브랜치 배포: push 하면 GitHub 의 "pages build and deployment" 가 빌드합니다.)
 
 
 ### 이 동영상 참고해서 만들고 있어요.
@@ -16,8 +16,14 @@
 * [Github 블로그 만들기 - 시즌1](https://youtube.com/playlist?list=PLIMb_GuNnFwfQBZQwD-vCZENL5YLDZekr&si=s_wisq4T0_SbuPT1) by 테디노트
 
 
-### Requirements for local env.
-* [Ruby](https://www.ruby-lang.org/en/downloads/) version 2.7.0 or higher, including all development headers (check your Ruby version using ruby -v)
+### 로컬 실행 (Local env.)
+* [Ruby](https://www.ruby-lang.org/en/downloads/) 와 Bundler 가 필요합니다. (`ruby -v` 로 확인)
+* `Gemfile` 은 GitHub Pages 와 같은 환경을 위해 `github-pages` gem 을 사용합니다.
+
+```bash
+bundle install
+bundle exec jekyll serve
+```
 
 ## 📄 라이선스 (License)
 
