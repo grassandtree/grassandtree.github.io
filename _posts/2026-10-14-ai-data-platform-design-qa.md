@@ -10,6 +10,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스]
 > 한국 SI 대기업 관점에서 자주 나오는 질문을 묻고 답하는 형식으로 정리했습니다. 개념 배경은 [엔터프라이즈 AI를 위한 차세대 데이터 구조…]({% post_url 2026-10-13-enterprise-ai-data-platform-overview %})(개요판)와 [AI 기반 엔터프라이즈 데이터 구조·검색·플랫폼 전환 설계]({% post_url 2026-10-13-ai-enterprise-data-platform-migration-design %})(상세판)를 참고하세요.
 >
 > 상황별 판단과 확인할 1차 출처에 초점을 맞춘 후속 글은 [AI 데이터 플랫폼 상황별 판단 Q&A]({% post_url 2026-10-14-ai-data-platform-scenario-qa %})를 참고하세요.
+>
+> 링크 접속 확인일: 2026-10-14 (Gartner·ISO·EUR-Lex·ACM은 자동 접속을 차단하므로 검색 결과로 존재를 확인했습니다)
 
 AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질문 42개를 8개 영역으로 묶었습니다. 각 답변은 '핵심 1줄 + 근거 3~5개 + 표/도식'으로 구성했고, 정의 나열보다 판단 근거(Why)와 트레이드오프를 드러내는 데 초점을 맞췄습니다. 질문이 많이 몰리는 축은 세 가지입니다. ① AI-ready 데이터와 메타데이터·시맨틱 계층, ② 망분리·온프레미스 제약 아래의 RAG/에이전트 설계, ③ 레거시 MPP/Hadoop에서 오픈 테이블 포맷 기반 레이크하우스로의 단계적 전환입니다.
 
@@ -45,6 +47,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 ## A. AI-ready 데이터 · 레이크하우스 · 오픈 테이블 포맷 (Q1~Q7)
 
 ### Q1. [개념·기본] 'AI-ready 데이터'란 무엇이고, 전통적 DW 품질관리와 무엇이 다른가?
+
+> **참고 링크**: [Gartner: AI-ready 데이터(2025.2)](https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk) · [EU AI Act 원문(EUR-Lex)](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng)
+
 **핵심**: AI-ready는 '깨끗한 데이터'가 아니라 '유스케이스 적합성이 메타데이터로 증명된 데이터'입니다.
 - **정의**: 특정 AI 유스케이스에 정렬(Align)되고, 지속적으로 검증(Qualify)되며, 거버넌스(Govern)가 적용된 데이터입니다. Gartner는 이를 갖추지 못한 AI 프로젝트의 60%가 2026년까지 포기될 것으로 예측합니다(예측).
 - **차이**: DW는 정형 데이터의 '오류 0'을 지향합니다. AI는 비정형까지 포함해 대표성·편향·최신성·출처를 보고, 기준이 유스케이스마다 다릅니다(이상탐지 학습에서는 이상치가 정답 데이터).
@@ -52,12 +57,18 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **SI 관점**: 착수 산출물에 'AI 유스케이스-데이터 적합성 매트릭스'를 넣습니다.
 
 ### Q2. [비교] DW·데이터 레이크·레이크하우스는 어떻게 다르고, 레이크하우스를 가능하게 한 핵심 기술은 무엇인가?
+
+> **참고 링크**: [Lakehouse 논문(CIDR 2021)](https://www.cidrdb.org/cidr2021/papers/cidr2021_paper17.pdf) · [Wikipedia: Data warehouse](https://en.wikipedia.org/wiki/Data_warehouse) · [Wikipedia: Data lake](https://en.wikipedia.org/wiki/Data_lake)
+
 **핵심**: 레이크하우스의 본질은 '객체 스토리지 위의 ACID 테이블 계층(OTF)과 공유 카탈로그'입니다.
 - DW는 고성능이지만 비용이 높고 비정형·ML 접근이 제한됩니다. 레이크는 저렴하지만 트랜잭션·거버넌스가 없어 '데이터 늪'이 되기 쉽습니다.
 - OTF(Iceberg/Delta/Hudi)의 스냅샷 격리, 스키마/파티션 진화, 타임트래블이 레이크 위에서 DW 수준 신뢰성을 내고, 계산·저장 분리로 Spark·Trino·Flink가 같은 테이블을 공유합니다.
 - **한계**: 초저지연 고동시성 BI와 고빈도 소규모 업데이트는 여전히 MPP/RDBMS가 유리합니다(Q5).
 
 ### Q3. [비교·판단] 한국 금융권 온프레미스 레이크하우스의 표준 포맷으로 Iceberg·Delta·Hudi 중 무엇을 골라야 하나?
+
+> **참고 링크**: [Iceberg 테이블 사양](https://iceberg.apache.org/spec/) · [Iceberg REST 카탈로그 사양](https://iceberg.apache.org/rest-catalog-spec/) · [Delta Lake](https://delta.io/) · [Apache Hudi](https://hudi.apache.org/) · [Polaris TLP 졸업 공지(2026.2)](https://polaris.apache.org/blog/2026/02/19/apache-polaris-graduates-to-top-level-project/)
+
 **핵심**: 다중 엔진·벤더 중립성이 최우선인 온프레미스라면 Iceberg를 표준으로 하고, 기존 Databricks 투자 영역은 상호운용으로 흡수합니다.
 - **엔진 중립성**: REST 카탈로그 사양으로 엔진과 카탈로그를 분리합니다. Polaris가 2026.2 Apache TLP로 졸업해 거버넌스 리스크가 줄었습니다.
 - **변경 처리·감사**: v3 deletion vector가 CDC/MERGE 테이블의 merge-on-read 비용을 줄이고, row lineage가 행 단위 변경 추적을 표준화해 금융 감사에 유리합니다.
@@ -72,6 +83,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 **리스크 문구**: "엔진별 v3 지원 수준이 다르므로 PoC에서 엔진 버전별 기능 매트릭스를 검증한다"
 
 ### Q4. [개념·심화] Iceberg v3에서 무엇이 바뀌었고, 운영할 때 무엇을 주의해야 하나?
+
+> **참고 링크**: [Iceberg 테이블 사양](https://iceberg.apache.org/spec/) · [Google: What's new in Iceberg v3](https://opensource.googleblog.com/2025/08/whats-new-in-iceberg-v3.html) · [Databricks: Iceberg v3](https://www.databricks.com/blog/apache-icebergtm-v3-moving-ecosystem-towards-unification)
+
 **핵심**: v3는 '삭제 성능(DV)·감사(row lineage)·반정형(variant)'을 표준화했지만, 되돌릴 수 없는 업그레이드입니다.
 - **Deletion Vector**: 데이터 파일마다 Puffin 파일 안의 Roaring bitmap으로 삭제 행을 표시합니다. v3에서는 position delete file 작성이 금지됩니다.
 - **Row Lineage**: 각 행에 _row_id와 _last_updated_sequence_number를 부여해 증분 처리·CDC·감사에 씁니다.
@@ -79,6 +93,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **주의**: v3→v2 다운그레이드가 불가능하므로 모든 소비 엔진의 v3 지원을 먼저 확인합니다. AWS는 2025.11.26 EMR 7.12·Glue·S3 Tables에서 지원을 발표했습니다.
 
 ### Q5. [설계·판단] RDBMS·MPP(Greenplum/Cloudberry)·OTF 레이크하우스의 역할은 어떻게 나눠야 하나?
+
+> **참고 링크**: [Wikipedia: Greenplum](https://en.wikipedia.org/wiki/Greenplum) · [Apache Cloudberry](https://cloudberry.apache.org/) · [Iceberg 테이블 사양](https://iceberg.apache.org/spec/)
+
 **핵심**: "트랜잭션은 RDBMS, 고동시성 정형 분석 SLA는 MPP, 대용량·다중 엔진·AI 데이터는 OTF"로 배치하고 데이터 사본 수를 통제합니다.
 - **RDBMS**: OLTP, 정합성, ms 단위 업무(차세대 계정계·기간계).
 - **MPP**: 수백 명 동시 BI, 복잡 조인, 정형 마트 SLA. Greenplum은 2024.5 폐쇄형으로 전환됐고, 후계로 Apache Cloudberry(GP7 기반, PG14 커널)와 EDB WarehousePG가 있습니다.
@@ -88,6 +105,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 **도식**: 계정계(RDBMS) →CDC→ [Bronze/Silver: Iceberg] → [Gold: Iceberg + MPP 마트] → BI / RAG / ML
 
 ### Q6. [판단] Greenplum 6을 쓰는 고객에게 앞으로의 MPP 전략으로 어떤 선택지가 있고, 무엇을 권할까?
+
+> **참고 링크**: [Cloudberry 프로젝트 연혁](https://cloudberry.apache.org/docs/introduction/cloudberry-history) · [Apache Cloudberry](https://cloudberry.apache.org/) · [Wikipedia: Greenplum](https://en.wikipedia.org/wiki/Greenplum)
+
 **핵심**: 단기 상용 지원으로 안정화하고, 중기 Cloudberry 호환 이전, 장기 OTF로 분석 데이터를 옮기는 단계적 탈출 전략을 권합니다.
 - **A(Broadcom Tanzu Greenplum 유지)**: 위험이 가장 낮지만 라이선스 비용과 단일 벤더 종속이 따릅니다. 1~2년 브리지로 적합합니다.
 - **B(Cloudberry/WarehousePG)**: GP 호환을 표방하고 gpbackup으로 이전합니다. 인큐베이팅 단계라 국내 기술지원 체계를 확인해야 합니다.
@@ -95,6 +115,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **근거**: GP6은 PG 9.4 기반이라 보안·확장 한계가 누적됩니다. 금융 마감 배치 SLA 때문에 빅뱅 전환은 금지합니다.
 
 ### Q7. [트러블슈팅] Iceberg 테이블 조회 성능이 점점 나빠진다면 원인과 대응은?
+
+> **참고 링크**: [Iceberg 유지보수 가이드](https://iceberg.apache.org/docs/latest/maintenance/) · [Iceberg Spark 프로시저](https://iceberg.apache.org/docs/latest/spark-procedures/)
+
 **핵심**: 대부분 '작은 파일·삭제 파일·매니페스트 누적' 문제이며, 테이블 유지보수를 운영 SLA로 정의해야 합니다.
 - **작은 파일**: 스트리밍·CDC 적재로 planning·open 비용이 커집니다 → 주기적 컴팩션(rewrite_data_files).
 - **삭제 파일**: v2 delete 누적으로 merge-on-read 비용 급증 → 컴팩션, v3 DV 검토.
@@ -106,6 +129,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 ## B. 온프레미스 데이터 인프라 · 객체 스토리지 (Q8~Q9)
 
 ### Q8. [설계] 망분리 금융사의 온프레미스 S3 호환 객체 스토리지는 어떤 기준으로 고르고, 티어링은 어떻게 설계하나?
+
+> **참고 링크**: [Ceph Object Gateway 문서](https://docs.ceph.com/en/latest/radosgw/) · [AWS S3 Object Lock(WORM)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html) · [VAST Data](https://www.vastdata.com/) · [MinIO GitHub 저장소](https://github.com/minio/minio)
+
 **핵심**: 성능 수치보다 '지속 가능한 유지보수 주체·S3 API 호환 범위·보안 기능(WORM·암호화·감사)'이 1차 기준입니다.
 - **Ceph(RGW)**: 성숙한 오픈소스이고 블록·파일·객체를 통합합니다. 운영 난도가 높아 전문 인력이나 상용 지원이 필요합니다.
 - **MinIO**: 커뮤니티판은 2025.12 유지보수 모드 이후 아카이브됐습니다. 상용(AIStor) 계약이 없으면 신규 구축에서 배제합니다.
@@ -114,6 +140,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **티어링**: Hot(NVMe: 최근 파티션·벡터 인덱스) / Warm(HDD 객체) / Archive(법정 보존분 WORM). Iceberg는 파일 경로를 메타데이터로 관리하므로 티어 이동 후에도 논리 테이블은 그대로이며, 학습 재현용 스냅샷은 tag로 만료를 막습니다.
 
 ### Q9. [리스크] 고객 시스템이 MinIO 커뮤니티판으로 구축되어 있다면 리스크와 대응은?
+
+> **참고 링크**: [MinIO GitHub 저장소](https://github.com/minio/minio) · [MinIO(AIStor)](https://min.io/) · [Ceph](https://ceph.io/en/)
+
 **핵심**: 핵심 리스크는 '보안 패치 공백'이며, 영향도 평가 후 상용 전환·이관·한시적 자체 유지 중 하나를 6~12개월 로드맵으로 실행합니다.
 - **사실관계**: 2025.5 콘솔 기능 제거 → 2025.10 소스 전용 배포 → 2025.12.3 유지보수 모드 → 2026년 아카이브. 라이선스는 AGPLv3로 유지됩니다.
 - **리스크**: CVE 대응 불가, 이미지 확보 불가(공급망), AGPL 의무 검토, 감사 시 '지원 종료 SW' 지적.
@@ -124,6 +153,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 ## C. 메타데이터 · 카탈로그 · 데이터 계약 · 메시/패브릭 (Q10~Q13)
 
 ### Q10. [비교] 기술 카탈로그(Polaris·Unity Catalog)와 비즈니스 메타데이터 플랫폼은 역할이 어떻게 다른가?
+
+> **참고 링크**: [Iceberg REST 카탈로그 사양](https://iceberg.apache.org/rest-catalog-spec/) · [Apache Polaris](https://polaris.apache.org/) · [Unity Catalog](https://www.unitycatalog.io/)
+
 **핵심**: 기술 카탈로그는 '엔진이 테이블을 찾고 권한을 받는 런타임 계층', 비즈니스 메타데이터는 '사람과 AI가 의미를 이해하는 계층'이며 서로 대체할 수 없습니다.
 - **기술 카탈로그**: 테이블 위치·스냅샷, 원자적 커밋, 자격증명 위임, RBAC. Polaris는 Iceberg REST 구현에 범위를 좁혔고, Unity Catalog는 모델·파일·함수까지 통합 거버넌스를 지향합니다.
 - **비즈니스 메타데이터**: 용어집, 오너, 품질 점수, 리니지, 민감도 분류, 사용 승인.
@@ -131,6 +163,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **SI 관점**: 국내 고객의 기존 메타데이터 관리 시스템(표준용어·도메인·코드)은 유지하고 기술 메타데이터만 연동하는 방식이 현실적입니다.
 
 ### Q11. [개념] 능동형 메타데이터와 OpenLineage는 무엇이고, 어디에 활용하나?
+
+> **참고 링크**: [OpenLineage](https://openlineage.io/) · [OpenLineage 객체 모델](https://openlineage.io/docs/spec/object-model) · [Gartner: AI-ready 데이터(2025.2)](https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk)
+
 **핵심**: 능동형 메타데이터는 '보여 주는' 단계를 넘어 '이벤트로 다른 시스템을 움직이는' 메타데이터이고, OpenLineage는 그 리니지 이벤트의 개방형 표준입니다.
 - **OpenLineage**: Job·Run·Dataset 모델 이벤트 사양. Spark·Airflow·dbt·Flink가 런타임 리니지를 내보냅니다.
 - **사례 1(영향도 분석)**: 원천 컬럼 변경 시 하위 마트·대시보드·RAG 인덱스를 자동 식별해 차세대 회귀 테스트 범위를 산정합니다.
@@ -139,6 +174,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **현업 미사용 시 처방**: 자동 수집, BI·SQL 편집기·사내 챗봇 안에서 노출, 데이터 오너 KPI 지정.
 
 ### Q12. [설계] 데이터 계약을 ODCS 기준으로 어떻게 설계하고 CI/CD에 넣을 수 있나?
+
+> **참고 링크**: [Open Data Contract Standard(ODCS)](https://bitol-io.github.io/open-data-contract-standard/latest/)
+
 **핵심**: 데이터 계약은 '생산자-소비자 간 스키마·품질·SLA·책임의 기계 판독형 합의'이고, 배포 게이트에서 강제해야 효과가 납니다.
 - **표준**: ODCS(LF AI & Data 산하 Bitol)는 YAML로 스키마·품질 규칙·SLA·팀/역할·서버를 정의합니다. v3.1.0(2025.12)에서 관계·SLA 스케줄, v3.2.0(2026.9)에서 AI 에이전트용 context와 벡터 타입이 추가됐다고 발표됐습니다.
 - **CI 게이트**: 스키마 변경 PR의 breaking change(삭제·타입 축소)를 검사하고 실패 시 머지를 차단합니다.
@@ -147,6 +185,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **SI 관점**: 차세대 인터페이스 정의서를 계약 YAML로 바꾸면 '문서'가 '테스트'가 됩니다.
 
 ### Q13. [비교·판단] 데이터 메시와 데이터 패브릭은 어떻게 다르고, 한국 대기업 그룹사에는 어떤 접근이 맞나?
+
+> **참고 링크**: [Data Mesh 원칙(Fowler)](https://martinfowler.com/articles/data-mesh-principles.html)
+
 **핵심**: 메시는 '조직·소유권' 원칙, 패브릭은 '메타데이터 기반 통합 기술'이며, 한국 대기업에는 '중앙 플랫폼 + 도메인 데이터 제품' 하이브리드가 현실적입니다.
 - **메시 4원칙**: 도메인 소유, 제품으로서의 데이터, 셀프서비스 플랫폼, 연합형 거버넌스.
 - **패브릭**: 능동형 메타데이터·지식그래프·자동화로 분산 데이터를 통합합니다.
@@ -158,6 +199,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 ## D. 시맨틱 레이어 · 온톨로지/지식그래프 · 컨텍스트 레이어 (Q14~Q16)
 
 ### Q14. [비교] 시맨틱 레이어·온톨로지·지식그래프는 어떻게 다르고 서로 어떤 관계인가?
+
+> **참고 링크**: [Wikipedia: Semantic layer](https://en.wikipedia.org/wiki/Semantic_layer) · [Wikipedia: Ontology](https://en.wikipedia.org/wiki/Ontology_%28information_science%29) · [Wikipedia: Knowledge graph](https://en.wikipedia.org/wiki/Knowledge_graph) · [W3C OWL 2](https://www.w3.org/TR/owl2-overview/)
+
 **핵심**: 시맨틱 레이어는 '지표·계산의 단일 정의', 온톨로지는 '개념과 관계의 형식 모델', 지식그래프는 '그 모델에 인스턴스를 채운 데이터'입니다.
 - **시맨틱 레이어**: 매출·연체율 같은 지표·차원·조인 경로를 한 번만 정의해 BI·API·LLM이 같은 숫자를 쓰게 합니다.
 - **온톨로지**: 클래스·속성·관계·제약(OWL/RDF)으로 '고객-계좌-상품-거래' 의미를 기술합니다.
@@ -165,6 +209,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **선택 기준**: 정량 지표 질의는 시맨틱 레이어, 관계 탐색·규정 해석·연결 분석(사기 탐지)은 지식그래프.
 
 ### Q15. [판단] 경영진 자연어 질의 서비스에는 Text-to-SQL 직접 생성과 시맨틱 레이어 경유 중 무엇이 맞나?
+
+> **참고 링크**: [Spider 2.0 논문(ICLR 2025)](https://arxiv.org/abs/2411.07763) · [dbt MetricFlow](https://docs.getdbt.com/docs/build/about-metricflow) · [dbt Labs: Open Semantic Interchange](https://www.getdbt.com/blog/the-osi-spec-updates)
+
 **핵심**: 경영 지표 질의는 시맨틱 레이어 경유(지표 API 호출형)를 기본으로 하고, 탐색적 분석에만 가드레일을 건 Text-to-SQL을 허용합니다.
 - **정확성**: 실무 스키마는 수천 개 테이블, 모호한 컬럼명, 사내 계산 규칙을 갖고 있어 직접 생성 SQL은 조인·지표 정의 오류가 잦습니다. Spider 2.0 논문(Lei et al., ICLR 2025)에 따르면 o1-preview 기반 코드 에이전트도 엔터프라이즈형 과제의 21.3%만 해결해, Spider 1.0(91.2%)·BIRD(73.0%)보다 크게 낮았습니다.
 - **일관성·통제**: 같은 '매출'이 보고서와 챗봇에서 달라지면 신뢰가 무너집니다. 지표 API는 행·열 권한 적용이 쉽고 과도 스캔 위험이 작습니다.
@@ -172,6 +219,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **근거(2차)**: Gartner D&A Summit 2026에서 "시맨틱 기반 없이 MCP에만 의존하는 에이전틱 분석의 60%가 2028년까지 실패"한다는 예측이 소개됐다고 전해집니다(2차 출처, 예측).
 
 ### Q16. [개념·심화] '컨텍스트 레이어'란 무엇이며, AI 에이전트 시대에 왜 핵심 계층이 되나?
+
+> **참고 링크**: [Model Context Protocol](https://modelcontextprotocol.io/) · [dbt MetricFlow](https://docs.getdbt.com/docs/build/about-metricflow) · [dbt Labs: Open Semantic Interchange](https://www.getdbt.com/blog/the-osi-spec-updates)
+
 **핵심**: 컨텍스트 레이어는 LLM·에이전트가 올바른 데이터·의미·권한·이력을 판단하도록 메타데이터·시맨틱·정책·기억을 묶어 제공하는 계층입니다.
 - **구성**: 용어·지표 정의, 엔터티 관계(지식그래프), 품질·최신성·리니지, 접근 정책, 대화·작업 기억.
 - **Why**: 실패는 대개 모델이 아니라 '맥락 부재'에서 옵니다(잘못된 테이블, 다른 지표 정의, 권한 밖 문서).
@@ -183,6 +233,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 ## E. 검색 · RAG · 에이전트 (Q17~Q26)
 
 ### Q17. [개념] RAG는 어떻게 진화해 왔나? (Naive→Advanced→Modular/Agentic→GraphRAG)
+
+> **참고 링크**: [RAG 원 논문(Lewis 외, 2020)](https://arxiv.org/abs/2005.11401) · [RAG 서베이(Gao 외, 2023)](https://arxiv.org/abs/2312.10997) · [GraphRAG 논문](https://arxiv.org/abs/2404.16130)
+
 **핵심**: RAG는 '한 번 검색해 붙이기'에서 '질의를 계획하고 반복 검색·검증하는 에이전트형'으로 진화했고, 관계 추론이 필요하면 그래프를 결합합니다.
 - **Naive**: 고정 청킹 → 벡터 top-k → 생성. 문맥 손실과 유사어 실패가 큽니다.
 - **Advanced**: 질의 재작성·확장, 하이브리드 검색, 리랭킹·압축.
@@ -190,6 +243,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **GraphRAG**: 엔터티 그래프와 커뮤니티 요약으로 전체 문서를 아우르는 질문·다중 홉 질의에 대응하지만 인덱싱 비용이 큽니다.
 
 ### Q18. [설계] 하이브리드 검색과 리랭킹을 포함한 검색 파이프라인은 어떻게 설계하고, 효과의 근거는 무엇인가?
+
+> **참고 링크**: [Anthropic: Contextual Retrieval](https://www.anthropic.com/engineering/contextual-retrieval) · [Wikipedia: Okapi BM25](https://en.wikipedia.org/wiki/Okapi_BM25) · [RRF 원 논문(SIGIR 2009)](https://doi.org/10.1145/1571941.1572114) · [Sentence Transformers: Cross-Encoder](https://www.sbert.net/examples/applications/cross-encoder/README.html)
+
 **핵심**: BM25(키워드)와 벡터(의미)를 병행해 재현율을 확보하고, 크로스 인코더 리랭커로 정밀도를 끌어올리는 2단 구조가 표준입니다.
 - **BM25가 필요한 이유**: 한국어 업무 문서의 상품코드·조문번호·약어는 임베딩이 놓치기 쉽습니다. 형태소 분석 기반 BM25가 보완합니다.
 - **결합**: RRF 등으로 후보 50~150개를 뽑고 리랭커로 top 5~20을 고릅니다.
@@ -197,6 +253,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **망분리 환경**: 임베딩·리랭커 모두 내부망 설치형 오픈 모델로 구성하고 한국어 성능은 사내 골든셋으로 고릅니다.
 
 ### Q19. [판단] 문서 유형별 청킹은 어떻게 해야 하나? (규정집, 상품설명서, 회의록, 표 중심 보고서)
+
+> **참고 링크**: [Anthropic: Contextual Retrieval](https://www.anthropic.com/engineering/contextual-retrieval) · [RAG 서베이(Gao 외, 2023)](https://arxiv.org/abs/2312.10997)
+
 **핵심**: 청킹은 '문서 구조를 보존하는 단위'로 자르는 것이 원칙이고, 고정 길이 청킹은 마지막 수단입니다.
 - **규정집·약관**: 조·항·호 계층으로 자르고 상위 제목 경로를 메타데이터로 붙입니다(부모-자식 검색).
 - **상품설명서**: 섹션 단위, 상품명·버전·시행일 메타데이터 필수(최신 버전 필터).
@@ -204,6 +263,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **표 중심 보고서**: 표는 구조화 추출(행 단위 텍스트화 또는 SQL 테이블 적재)하고 캡션과 결합합니다. 공통으로 청크 앞 문서 맥락 부착, 오버랩 10~20%, 평가 기반 크기 튜닝을 적용합니다.
 
 ### Q20. [비교·판단] 벡터 저장소는 전용 벡터 DB, 기존 DB 확장(pgvector 등), 검색엔진(OpenSearch 등) 중 무엇을 골라야 하나?
+
+> **참고 링크**: [pgvector](https://github.com/pgvector/pgvector) · [OpenSearch 벡터 검색](https://opensearch.org/docs/latest/vector-search/) · [Milvus](https://github.com/milvus-io/milvus)
+
 **핵심**: 문서 수천만 건 이하·강한 권한 통제·기존 DBA 체계가 있으면 기존 DB/검색엔진 확장이 우선이고, 초대규모·고QPS일 때만 전용 벡터 DB를 씁니다.
 - **RDBMS 확장**: 트랜잭션·권한·백업을 재사용하지만 대규모 ANN 성능에 한계가 있습니다.
 - **검색엔진**: BM25와 벡터를 한 엔진에서 하이브리드로 처리하고 문서 수준 보안을 쓸 수 있습니다.
@@ -211,6 +273,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **공공 근거**: 디플정위 공공부문 초거대 AI 가이드라인 2.0은 RAG 도입 시 벡터DB 구축 고려사항을 별도로 제시합니다.
 
 ### Q21. [설계·심화] 권한 인지형(Permission-aware) RAG는 어떻게 설계하나?
+
+> **참고 링크**: [Wikipedia: RBAC](https://en.wikipedia.org/wiki/Role-based_access_control) · [OWASP Top 10 for LLM](https://genai.owasp.org/llm-top-10/)
+
 **핵심**: 권한은 생성 단계가 아니라 '검색 단계(사전 필터)'에서 강제해야 하며, 원천 시스템 ACL을 인덱스 메타데이터로 동기화해야 합니다.
 - **Why**: "권한 없는 내용은 답하지 마"라는 프롬프트 지시는 우회될 수 있고, 검색 결과에 들어간 순간 유출 위험이 생깁니다.
 - **설계**: 청크마다 ACL 메타데이터(부서·직급·보안등급·문서 ID)를 저장하고 사용자 클레임으로 사전 필터링합니다. 원천(ECM·그룹웨어) 권한 변경은 CDC 방식으로 반영하고 지연 SLA를 둡니다. 고민감 문서는 별도 인덱스로 물리 분리하고 N2SF 보안등급(공공)과 연계합니다.
@@ -220,6 +285,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 **도식**: 사용자(SSO 클레임) → [ACL 사전필터+하이브리드 검색] → 리랭크 → 생성 → [출력 필터(PII 마스킹)] → 감사 로그
 
 ### Q22. [트러블슈팅] 사내 RAG의 답변 정확도가 낮다는 불만이 많다면 어떻게 진단하고 개선하나?
+
+> **참고 링크**: [Lost in the Middle 논문](https://arxiv.org/abs/2307.03172) · [Anthropic: Contextual Retrieval](https://www.anthropic.com/engineering/contextual-retrieval) · [RAGAS 문서](https://docs.ragas.io/)
+
 **핵심**: '검색 실패인가, 생성 실패인가'를 먼저 분리 계측하고, 골든셋 기반으로 한 번에 한 변수씩 개선합니다.
 - **분리 진단**: 정답 근거가 top-k에 들어왔는가(Context Recall)? 들어왔는데 틀렸다면 생성 문제(Faithfulness)입니다.
 - **검색 실패 원인**: 청킹 경계, 코드·키워드 미매칭(BM25 부재), 임베딩의 한국어 도메인 부적합, 구버전 문서 혼재, 표·이미지 파싱 실패.
@@ -227,6 +295,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **개선 루프**: 실패 로그 라벨링 → 원인별 처방 → 회귀 평가 → 배포. 데이터·파싱 개선이 모델 교체보다 효과가 큰 경우가 많습니다.
 
 ### Q23. [설계] RAG/에이전트 평가 체계(RAGAS 등)와 운영 KPI는 어떻게 설계하나?
+
+> **참고 링크**: [RAGAS 문서](https://docs.ragas.io/)
+
 **핵심**: 오프라인(골든셋)·온라인(피드백·로그)·위험(레드팀) 3층 평가를 운영하고 배포 게이트에 연결합니다.
 - **RAGAS 계열**: Faithfulness, Answer Relevancy, Context Precision/Recall. 검색은 Recall@k·MRR·nDCG, 에이전트는 과업 성공률·도구 호출 정확도·건당 비용.
 - **골든셋**: 현업 SME가 질문-정답-근거 200~500건을 만들고 분기마다 갱신합니다. LLM-as-judge는 사람 평가와 일치도를 검증한 뒤 씁니다.
@@ -234,6 +305,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **공공 연계**: 공공 AI 가이드라인 2.0의 투입-과정-산출-결과 성과지표 체계에 맞춰 보고합니다.
 
 ### Q24. [시나리오] 금융사가 "망분리 환경에서 RAG 기반 상담 지원 시스템"을 원한다면 아키텍처와 규제 대응은 어떻게 하나?
+
+> **참고 링크**: [금융위: 망분리 개선 로드맵(2024.8)](https://www.fsc.go.kr/no010101/82885) · [금융위: 금융권 AI 활용 지원(2024.12)](https://www.fsc.go.kr/no010101/83594) · [금융위: SaaS 망분리 규제 개선(2026.1)](https://www.fsc.go.kr/no010101/86080) · [금융위: AI 관련 망분리 완화(2026.5)](https://www.fsc.go.kr/no010101/86972) · [AI 기본법(국가법령정보센터)](https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5%EB%B0%9C%EC%A0%84%EA%B3%BC%EC%8B%A0%EB%A2%B0%EA%B8%B0%EB%B0%98%EC%A1%B0%EC%84%B1%EB%93%B1%EC%97%90%EA%B4%80%ED%95%9C%EA%B8%B0%EB%B3%B8%EB%B2%95)
+
 **핵심**: 개인신용정보 업무는 '내부망 설치형 오픈소스 LLM', 일반 지식 업무는 '샌드박스·예외 요건을 충족한 외부 상용 AI'로 나누는 이원 구조를 제안합니다.
 - **규제 근거**: 금융위 「금융분야 망분리 개선 로드맵」(2024.8.13)은 샌드박스로 생성형 AI 활용과 가명처리 개인신용정보 처리를 허용했고, 「금융권 생성형 AI 활용 지원 방안」(2024.12.12)은 상용 AI와 내부망 오픈소스 AI의 Two-track 체계를 제시했습니다.
 - **최신 동향**: 2026.1.19 내부 업무망 SaaS 망분리 예외 시행세칙 개정이 사전예고됐습니다(고유식별정보·개인신용정보 처리 시 예외 불가). 2026.5에는 보안목적 AI 한시 완화가 발표됐고 1차로 10개사가 선정됐다고 보도됐습니다.
@@ -243,6 +317,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 **도식**: [상담 단말] → [AI 게이트웨이(인증·로깅·필터)] → {내부 LLM+RAG(개인신용정보 OK) | 가명처리 → 외부 상용 AI(샌드박스/예외 범위)}
 
 ### Q25. [비교] MCP와 A2A는 어떻게 다르고, 엔터프라이즈 아키텍처에서 어디에 위치하며 보안은 어떻게 고려하나?
+
+> **참고 링크**: [Model Context Protocol](https://modelcontextprotocol.io/) · [Anthropic: MCP의 Agentic AI Foundation 기증](https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation) · [A2A Protocol](https://a2a-protocol.org/)
+
 **핵심**: MCP는 '에이전트↔도구·데이터', A2A는 '에이전트↔에이전트' 연결 표준이며, 둘 다 보안 경계가 아니므로 게이트웨이 통제가 필수입니다.
 - **MCP**: 호스트·클라이언트·서버 구조로 도구·리소스·프롬프트를 노출합니다. 2025.12.9 Linux Foundation 산하 Agentic AI Foundation에 기증됐습니다.
 - **A2A**: Google이 2025.4 발표 후 Linux Foundation에 기증했습니다. 에이전트 카드와 비동기·장기 과업 위임을 지원합니다.
@@ -250,6 +327,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **보안**: 도구 권한 최소화, MCP 서버 화이트리스트·서명 검증, 문서 경유 프롬프트 인젝션 방어, 사용자 위임 권한(OBO) 전파, 도구 호출 감사 로그.
 
 ### Q26. [판단·리스크] 고객이 "전사 AI 에이전트 100개 구축"을 원한다면 범위와 거버넌스를 어떻게 잡아야 하나?
+
+> **참고 링크**: [Gartner: 에이전틱 AI 40% 취소 예측(2025.6)](https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027)
+
 **핵심**: 숫자 목표 대신 '가치·실현성·위험' 3축으로 우선순위를 매기고, 에이전트 레지스트리와 수명주기 거버넌스를 먼저 세웁니다.
 - **근거(예측)**: Gartner는 비용 증가, 불명확한 가치, 위험통제 미흡으로 2027년 말까지 에이전틱 AI 프로젝트의 40% 이상이 취소될 것으로 예측했고, 실질 역량 벤더는 약 130개라는 'agent washing' 경고도 냈습니다.
 - **범위**: 규칙 기반 자동화·RPA로 충분한 업무는 에이전트화하지 않습니다. 다단계 판단과 비정형 데이터가 있는 업무부터 시작합니다.
@@ -261,6 +341,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 ## F. 플랫폼 전환 · 이관 · 운영 (Q27~Q32)
 
 ### Q27. [개념·판단] 7R 전략이란 무엇이고, 레거시 DW(Teradata/Exadata) 전환에는 어떻게 적용하나?
+
+> **참고 링크**: [AWS: 마이그레이션 전략(7R)](https://docs.aws.amazon.com/prescriptive-guidance/latest/large-migration-guide/migration-strategies.html)
+
 **핵심**: 7R은 워크로드 단위로 고르며, DW 전환은 'Replatform(단기) + Refactor(핵심 마트) + Retire(미사용 자산)' 조합이 일반적입니다.
 - **Retire**: 사용 로그로 미사용 테이블·리포트를 폐기해 전환 범위를 줄입니다. **Retain**: 규제·마감 SLA로 당분간 유지.
 - **Rehost/Relocate**: 동일 엔진을 다른 인프라로(예: Exadata → Exadata Cloud@Customer). **Replatform**: SQL 호환 MPP·PostgreSQL 계열로 최소 수정 이전.
@@ -268,6 +351,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **Repurchase**: SaaS 분석 서비스(공공·금융은 CSAP·망분리 제약 검토).
 
 ### Q28. [설계] 스트랭글러 패턴을 데이터 플랫폼 전환에 어떻게 적용하나?
+
+> **참고 링크**: [Strangler Fig(Fowler)](https://martinfowler.com/bliki/StranglerFigApplication.html)
+
 **핵심**: 소비 계층 앞에 추상화 계층(시맨틱·페더레이션·API)을 두고 저장소를 도메인 단위로 점진 교체하면, 사용자 영향 없이 레거시를 고사시킬 수 있습니다.
 - **1단계**: BI·리포트·인터페이스를 시맨틱 레이어, 쿼리 페더레이션(Trino 등), API로 우회시킵니다(파사드).
 - **2단계**: 도메인별로 OTF에 이관하고 CDC 동기화 후 라우팅을 전환합니다.
@@ -277,6 +363,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 **도식**: [BI/앱] → [파사드: 시맨틱/페더레이션] → {레거시 DW(축소) ↔CDC↔ 신규 레이크하우스(확대)}
 
 ### Q29. [설계] CDC 기반 데이터 이관과 병행 운영·컷오버는 어떻게 계획하나?
+
+> **참고 링크**: [Debezium 문서](https://debezium.io/documentation/reference/stable/index.html) · [Wikipedia: Change data capture](https://en.wikipedia.org/wiki/Change_data_capture)
+
 **핵심**: '초기 적재 + CDC 증분 + 정합성 검증 자동화 + 리허설 2회 이상 + 롤백 기준'이 컷오버 계획의 다섯 기둥입니다.
 - **초기 적재·CDC**: 스냅샷 시점 SCN/LSN을 기록하고, 로그 기반 CDC로 트랜잭션 순서와 삭제 이벤트를 보존합니다. Iceberg v3 DV·row lineage가 CDC 대상 테이블의 운영 부담을 줄입니다.
 - **정합성**: 건수·합계·해시 비교를 파티션 단위로 자동화하고, 주요 리포트 수치 대사도 병행합니다.
@@ -284,6 +373,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **컷오버**: 동결 시점, Go/No-Go 체크리스트, 롤백 트리거(정합성 오류율·배치 SLA 초과)와 롤백 소요 시간을 명시합니다.
 
 ### Q30. [판단] Hadoop(Cloudera) 기반 빅데이터 플랫폼은 어떤 전략으로 전환하나?
+
+> **참고 링크**: [Iceberg Hive 마이그레이션](https://iceberg.apache.org/docs/latest/hive-migration/) · [Trino](https://trino.io/)
+
 **핵심**: HDFS+Hive 메타스토어를 '객체 스토리지+Iceberg+REST 카탈로그'로 바꾸는 저장 계층 전환을 먼저 하고, 연산 엔진은 Spark/Trino로 이어 씁니다.
 - **Why**: 컴퓨트·스토리지 결합 구조는 확장 비용이 높고 작은 파일·NameNode 한계와 운영 인력 부족이 누적됩니다.
 - **단계**: Hive 테이블을 Iceberg로(in-place migrate 또는 CTAS) → S3 호환 객체로 이동 → REST 카탈로그 전환 → 워크로드 재배치.
@@ -291,6 +383,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **리스크**: Hive UDF·SerDe 호환, Ranger 정책 이관, 스케줄러 이관.
 
 ### Q31. [설계] TCO 비교 모델(온프레미스 레이크하우스 vs 퍼블릭 클라우드 vs 기존 MPP 유지)과 성숙도 진단은 어떻게 구성하나?
+
+> **참고 링크**: [FinOps Foundation](https://www.finops.org/) · [DAMA-DMBOK](https://www.dama.org/cpages/body-of-knowledge) · [EDM Council DCAM](https://edmcouncil.org/frameworks/dcam/)
+
 **핵심**: 5년 기준으로 '인프라·라이선스·인력·전환·리스크 비용'을 모두 넣어야 하며, 데이터 이그레스와 GPU 사용률이 결론을 뒤집는 핵심 변수입니다.
 - **직접비·간접비**: HW/클라우드 사용료, 라이선스, 유지보수, 상면·전력 / 운영 FTE, 교육, 이중 운영 비용, 전환 프로젝트 비용.
 - **리스크 비용**: 벤더 종속(가격 인상), 지원 종료 SW(Greenplum 폐쇄, MinIO CE), 규제 미준수.
@@ -298,6 +393,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **성숙도 진단**: 데이터 관리·플랫폼·거버넌스·조직/역량·AI 활용 5축을 DAMA-DMBOK·DCAM 기준으로 채점하고 As-Is/To-Be 레이더 차트로 투자 우선순위를 보여 줍니다.
 
 ### Q32. [비교] DataOps·MLOps·LLMOps는 어떻게 다르고, 통합 운영 체계는 어떻게 만드나?
+
+> **참고 링크**: [Wikipedia: MLOps](https://en.wikipedia.org/wiki/MLOps)
+
 **핵심**: 관리 대상이 '데이터→모델→LLM 애플리케이션'으로 넓어지며, 공통 기반(CI/CD·관측·카탈로그)을 공유하는 통합 체계가 효율적입니다.
 - **DataOps**: 파이프라인 CI/CD, 데이터 계약 테스트, 관측(데이터 SLA).
 - **MLOps**: 피처 스토어, 실험 추적, 모델 레지스트리, 드리프트 모니터링, 재학습.
@@ -309,6 +407,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 ## G. 거버넌스 · 보안 · 규제 대응 (Q33~Q37)
 
 ### Q33. [규제] AI 기본법의 주요 의무는 SI 사업에서 무엇을 뜻하고, 산출물에는 무엇을 반영해야 하나?
+
+> **참고 링크**: [AI 기본법(국가법령정보센터)](https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5%EB%B0%9C%EC%A0%84%EA%B3%BC%EC%8B%A0%EB%A2%B0%EA%B8%B0%EB%B0%98%EC%A1%B0%EC%84%B1%EB%93%B1%EC%97%90%EA%B4%80%ED%95%9C%EA%B8%B0%EB%B3%B8%EB%B2%95)
+
 **핵심**: AI 기본법은 '고영향 AI 확인 → 투명성(고지·표시) → 안전성·신뢰성 조치 문서화'를 요구하므로, 이를 설계 산출물과 검수 기준에 내재화해야 합니다.
 - **시행**: 2025.1.21 공포, 2026.1.22 법률·시행령 시행.
 - **고영향 AI(제2조)**: 에너지, 먹는물, 보건의료, 의료기기, 원자력, 범죄수사 생체인식, 채용·대출 심사 등 권리·의무 판단, 교통, 공공서비스 자격 결정, 학생 평가의 10개 영역에 대통령령 위임 영역이 더해집니다.
@@ -317,6 +418,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **제재·산출물**: 과태료 최대 3천만원, 과기정통부는 '최소 1년 이상' 계도기간 운영(종료일 미확정). 산출물로 고영향 해당성 검토서, AI 위험관리 계획서, 설명가능성 설계서, HITL 정의서, 고지·표시 화면 설계, 로그 보관 정책을 넣습니다.
 
 ### Q34. [규제] 생성형 AI를 구축할 때 개인정보보호법상 쟁점은 무엇이고, 개인정보위 안내서에 따라 어떻게 대응하나?
+
+> **참고 링크**: [개인정보위: 생성형 AI 개인정보 처리 안내서(2025.8)](https://www.pipc.go.kr/np/cop/bbs/selectBoardArticle.do?bbsId=BS074&mCode=C020010000&nttId=11410) · [Wikipedia: Pseudonymization](https://en.wikipedia.org/wiki/Pseudonymization)
+
 **핵심**: 개인정보위 안내서(2025.8)의 4단계 수명주기(목적설정→전략수립→학습·개발→적용·관리)에 맞춰 적법 근거와 안전조치를 체크리스트로 만듭니다.
 - **목적 설정**: 의도된 용례와 예견 가능한 오용을 정의합니다. 공개된 개인정보로 학습할 때는 정당한 이익(법 제15조①6호)의 3요건(목적 정당성·필요성·이익형량)을 검토합니다.
 - **전략 수립**: 서비스형 LLM·기성 모델·자체 개발 중 선택, PbD 적용, 대규모·민감정보 처리 시 개인정보 영향평가 권장.
@@ -324,6 +428,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **가명정보(데이터 3법)**: 통계작성·과학적 연구·공익적 기록보존 목적이면 동의 없이 처리할 수 있으나 재식별 금지와 결합전문기관 절차를 지켜야 합니다.
 
 ### Q35. [규제·설계] 공공기관 RAG 사업에서 CSAP 등급과 국가망보안체계(N2SF)를 고려하면 배치를 어떻게 설계하나?
+
+> **참고 링크**: [클라우드컴퓨팅서비스 보안인증에 관한 고시](https://www.law.go.kr/%ED%96%89%EC%A0%95%EA%B7%9C%EC%B9%99/%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C%EC%BB%B4%ED%93%A8%ED%8C%85%EC%84%9C%EB%B9%84%EC%8A%A4%EB%B3%B4%EC%95%88%EC%9D%B8%EC%A6%9D%EC%97%90%EA%B4%80%ED%95%9C%EA%B3%A0%EC%8B%9C)
+
 **핵심**: 시스템·데이터 중요도에 따라 '공개데이터=민간 클라우드(하), 비공개 업무=중 등급, 민감·행정내부=상 등급 또는 자체 구축'으로 배치합니다.
 - **CSAP 등급제**: 하 등급은 개인정보 없는 공개 공공데이터 시스템으로 논리적 분리를 허용합니다. 중 등급은 비공개 업무자료 시스템입니다. 상 등급은 민감정보·행정내부업무 시스템이며 외부 네트워크 차단, 보안감사 로그 통합관리, 계정·접근권한 자동화, 보안패치 자동화 4개 항목이 추가됐습니다.
 - **공공 AI 가이드라인 2.0(디플정위, 2025.4)**: 범정부 공통기반·자체 구현·민간 클라우드 중 인프라를 고르게 하고, N2SF 데이터 보안등급 분류와 보안통제 항목을 제시합니다.
@@ -331,6 +438,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **시장 신호**: 삼성SDS는 민관협력형(PPP) 클라우드에서 공공 전용 FabriX를 제공한다고 밝혔습니다(기업 발표).
 
 ### Q36. [리스크] LLM·RAG 시스템의 보안 위협(OWASP LLM Top 10 관점)과 대응은?
+
+> **참고 링크**: [OWASP Top 10 for LLM](https://genai.owasp.org/llm-top-10/)
+
 **핵심**: 가장 실질적인 위협은 '간접 프롬프트 인젝션·민감정보 유출·과도한 에이전트 권한'이며, 입력·검색·출력·도구 4지점에서 다층 방어합니다.
 - **프롬프트 인젝션(문서 경유)**: 콘텐츠 정화, 지시와 데이터 분리, 도구 호출 승인.
 - **민감정보 노출**: 사전 필터 ACL, 출력 PII 마스킹.
@@ -338,6 +448,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **공급망·운영**: 오픈소스 모델·MCP 서버 서명·SBOM 검증, 레드팀 정례화, 감사 로그 보관.
 
 ### Q37. [설계] AI 거버넌스와 데이터 거버넌스를 통합한 조직·프로세스는 어떻게 설계하나?
+
+> **참고 링크**: [ISO/IEC 42001](https://www.iso.org/standard/42001) · [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)
+
 **핵심**: 데이터 거버넌스 위에 AI 거버넌스(위험평가·모델 승인·모니터링)를 얹은 '단일 위원회 + 공통 메타데이터' 구조가 중복과 공백을 줄입니다.
 - **조직**: CDO·CAIO·CPO·CISO가 참여하는 데이터·AI 위원회, 도메인 데이터 오너와 AI 유스케이스 오너 지정.
 - **프로세스**: 접수 → 위험등급 분류(고영향 여부·개인정보) → 데이터 적합성 검증 → 모델 승인 → 운영 모니터링 → 폐기.
@@ -349,6 +462,9 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 ## H. SI 사업 수행 관점 (Q38~Q42)
 
 ### Q38. [설계] AI·데이터 플랫폼 구축 사업의 요구사항 정의는 기존 SI와 무엇이 다른가?
+
+> **참고 링크**: [RAGAS 문서](https://docs.ragas.io/) · [AI 기본법(국가법령정보센터)](https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5%EB%B0%9C%EC%A0%84%EA%B3%BC%EC%8B%A0%EB%A2%B0%EA%B8%B0%EB%B0%98%EC%A1%B0%EC%84%B1%EB%93%B1%EC%97%90%EA%B4%80%ED%95%9C%EA%B8%B0%EB%B3%B8%EB%B2%95)
+
 **핵심**: AI 사업의 요구사항은 '기능 명세'가 아니라 '품질 목표(정확도·지연·비용)와 평가 방법'으로 정의해야 검수 분쟁을 막습니다.
 - **확률적 출력**: "정확도 몇 %를 어떤 골든셋으로 측정"을 계약 단계에서 합의합니다.
 - **데이터 의존성**: 고객 데이터 품질·제공 범위를 '전제조건'으로 명시하고 R&R을 정합니다.
@@ -356,24 +472,36 @@ AI 데이터 플랫폼을 설계하거나 전환할 때 자주 부딪히는 질�
 - **산출물**: 유스케이스 정의서, 골든셋 구축 계획, 평가 계획서, 데이터 제공 확약, 위험관리 계획(AI 기본법·개인정보).
 
 ### Q39. [시나리오] 고객 CIO가 "PoC는 잘 됐는데 본사업에서 왜 성능이 떨어지나?"라고 묻는다면 원인과 PoC 설계 원칙은?
+
+> **참고 링크**: [Gartner: 생성형 AI PoC 후 포기 예측(2024.7)](https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025)
+
 **핵심**: PoC가 '선별된 깨끗한 데이터·소수 사용자·권한 미적용'으로 수행됐기 때문이며, PoC는 처음부터 '운영 조건 축소판'으로 설계해야 합니다.
 - **원인**: 데이터 규모·다양성 차이, 권한 필터 적용으로 인한 재현율 하락, 동시 사용자 부하, 문서 최신성 관리 부재, 실사용 질문의 모호성.
 - **근거(예측)**: Gartner는 2024.7.29 보도자료에서 데이터 품질 부족·위험통제 미흡·비용 증가·불명확한 가치로 2025년 말까지 생성형 AI 프로젝트의 최소 30%가 PoC 이후 포기될 것으로 예측했습니다.
 - **설계 원칙**: ① 실제 데이터 샘플(파싱 난이도 포함) ② 권한 적용 ③ 현업 질문 골든셋 ④ 성공 기준 사전 합의 ⑤ 비용·지연 측정 ⑥ 확장 시 리스크 목록 산출.
 
 ### Q40. [판단] 아키텍처 의사결정 근거는 고객에게 어떻게 문서화하고 설득하나? (예: Iceberg 표준 채택)
+
+> **참고 링크**: [ADR(adr.github.io)](https://adr.github.io/) · [Nygard: Documenting Architecture Decisions](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)
+
 **핵심**: ADR(Architecture Decision Record)로 '맥락-선택지-평가기준-결정-결과'를 남기고, 정량 PoC와 리스크 비용으로 설득합니다.
 - **ADR 구조**: 배경, 선택지(최소 3개), 평가기준·가중치, 결정, 트레이드오프, 재검토 조건.
 - **설득 논리**: 고객 전략 정렬(개방성·종속 회피), PoC 수치, 5년 TCO, OSS 거버넌스 리스크 사례(Greenplum 폐쇄, MinIO CE 중단), 레퍼런스.
 - **OSS 판단 기준**: 단일 벤더 프로젝트보다 재단(ASF·LF) 거버넌스 프로젝트를 우선합니다. Polaris·Cloudberry의 ASF 이관, MCP의 LF 기증이 근거입니다.
 
 ### Q41. [설계] AI·데이터 플랫폼 사업의 비용 산정과 인력·역량 계획은 어떻게 세우나?
+
+> **참고 링크**: [FinOps Foundation](https://www.finops.org/)
+
 **핵심**: 비용은 '구축 + 데이터 준비 + GPU 인프라 + 운영 튜닝'을 분리 산정하고, 인력은 데이터 엔지니어·ML/LLM 엔지니어·도메인 SME·보안을 균형 있게 배치합니다.
 - **분리 이유**: 데이터 정제·파싱·골든셋 구축은 공수 비중이 크지만 기능 FP로는 잡히지 않습니다.
 - **GPU 비용**: 동시 사용자 × 평균 토큰 × 모델 크기로 추론 용량을 산정하고, 라우팅(작은 모델 우선)으로 절감합니다. LG CNS 에이전틱웍스의 Router와 삼성SDS의 AI 스마트 라우터가 같은 개념입니다.
 - **역량 계획**: 내부 리스킬링(SK AX는 비개발자 대상 4주 에이전트 개발 교육을 출시했다고 발표), LLMOps·평가·보안 핵심 역할은 사내 전문가 풀로 확보합니다.
 
 ### Q42. [리스크·품질] AI 플랫폼 구축 사업의 품질관리와 리스크 관리 체계는 어떻게 만드나?
+
+> **참고 링크**: [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) · [ISO/IEC 42001](https://www.iso.org/standard/42001)
+
 **핵심**: 품질은 '데이터 → 검색 → 응답 → 운영' 4계층 게이트로, 리스크는 기술·데이터·규제·조직 4범주 레지스터로 관리합니다.
 - **품질 게이트**: 데이터(계약 테스트·파싱 성공률) → 검색(Recall@k) → 응답(Faithfulness·정답률) → 운영(P95 지연·가용성·비용).
 - **기술 리스크**: 모델·OSS 지원 종료, 엔진 호환성(Iceberg v3) → 추상화 계층과 대체안 확보.

@@ -8,6 +8,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 ---
 
 > 정의보다 "이 상황에서 무엇을 고르고 왜 그런가"에 초점을 맞춘 질의응답입니다. 질문 42개를 영역별로 정리한 글은 [AI 데이터 플랫폼 설계 Q&A]({% post_url 2026-10-14-ai-data-platform-design-qa %}), 개념 배경은 [개요판]({% post_url 2026-10-13-enterprise-ai-data-platform-overview %})과 [상세판]({% post_url 2026-10-13-ai-enterprise-data-platform-migration-design %})을 참고하세요.
+>
+> 링크 접속 확인일: 2026-10-14 (Gartner·ISO·EUR-Lex·ACM은 자동 접속을 차단하므로 검색 결과로 존재를 확인했습니다)
 
 ## 이 글의 구성
 
@@ -30,28 +32,30 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 | 분야 | 출처 | 확인할 내용 |
 | --- | --- | --- |
-| 법령 | [국가법령정보센터](https://www.law.go.kr) — "인공지능 발전과 신뢰 기반 조성" 검색 | AI 기본법 제2조(고영향 정의), 제31조(투명성), 제34조(사업자 책무), 시행일 |
-| 법령 | [EU AI Act 원문(EUR-Lex)](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) | 제10조(데이터 거버넌스), 제50조(투명성) |
-| 금융 | [금융위원회 보도자료](https://www.fsc.go.kr) — "망분리", "생성형 AI" 검색 | 망분리 개선 로드맵(2024.8), 생성형 AI 활용 지원(2024.12), SaaS 예외 |
-| 개인정보 | [개인정보보호위원회](https://www.pipc.go.kr) — "생성형 AI 개인정보 처리 안내서" | 4단계 수명주기, 정당한 이익 요건 |
-| 공공 | 디지털플랫폼정부위원회 — "초거대 AI 가이드라인 2.0" / KISA — "CSAP 등급제" | 공공 AI 인프라 선택지, CSAP 상·중·하 기준 |
+| 법령 | [AI 기본법(국가법령정보센터)](https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5%EB%B0%9C%EC%A0%84%EA%B3%BC%EC%8B%A0%EB%A2%B0%EA%B8%B0%EB%B0%98%EC%A1%B0%EC%84%B1%EB%93%B1%EC%97%90%EA%B4%80%ED%95%9C%EA%B8%B0%EB%B3%B8%EB%B2%95) | AI 기본법 제2조(고영향 정의), 제31조(투명성), 제34조(사업자 책무), 시행일 |
+| 법령 | [EU AI Act 원문(EUR-Lex)](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng) | 제10조(데이터 거버넌스), 제50조(투명성) |
+| 금융 | [금융위원회 보도자료](https://www.fsc.go.kr/no010101): [망분리 로드맵](https://www.fsc.go.kr/no010101/82885) · [AI 활용 지원](https://www.fsc.go.kr/no010101/83594) · [SaaS 개선](https://www.fsc.go.kr/no010101/86080) | 망분리 개선 로드맵(2024.8), 생성형 AI 활용 지원(2024.12), SaaS 예외 |
+| 개인정보 | [개인정보위: 생성형 AI 개인정보 처리 안내서](https://www.pipc.go.kr/np/cop/bbs/selectBoardArticle.do?bbsId=BS074&mCode=C020010000&nttId=11410) | 4단계 수명주기, 정당한 이익 요건 |
+| 공공 | 디지털플랫폼정부위원회 — "초거대 AI 가이드라인 2.0" / [CSAP 고시(국가법령정보센터)](https://www.law.go.kr/%ED%96%89%EC%A0%95%EA%B7%9C%EC%B9%99/%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C%EC%BB%B4%ED%93%A8%ED%8C%85%EC%84%9C%EB%B9%84%EC%8A%A4%EB%B3%B4%EC%95%88%EC%9D%B8%EC%A6%9D%EC%97%90%EA%B4%80%ED%95%9C%EA%B3%A0%EC%8B%9C) | 공공 AI 인프라 선택지, CSAP 상·중·하 기준 |
 | AI 위험 | [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) / [ISO/IEC 42001](https://www.iso.org/standard/42001) | 4기능(Govern·Map·Measure·Manage), AIMS 정의 |
-| 보안 | OWASP — "Top 10 for LLM Applications" | 위협 항목 이름 |
+| 보안 | [OWASP Top 10 for LLM Applications](https://genai.owasp.org/llm-top-10/) | 위협 항목 이름 |
 | 테이블 포맷 | [Apache Iceberg spec](https://iceberg.apache.org/spec/) | v3 기능(deletion vector, row lineage, variant) |
 | 카탈로그 | [Apache Polaris](https://polaris.apache.org) | REST 카탈로그, TLP 졸업(2026.2) |
 | MPP | [Apache Cloudberry](https://cloudberry.apache.org) | Greenplum 폐쇄와 후계 경과 |
-| 메타데이터 | [OpenLineage](https://openlineage.io) / Bitol "Open Data Contract Standard" | Job·Run·Dataset 모델, ODCS 구성 요소 |
-| 에이전트 | [Model Context Protocol](https://modelcontextprotocol.io) / "A2A protocol" 검색 | 구성 요소, LF 이관 날짜 |
-| 검색 | [Anthropic Contextual Retrieval](https://www.anthropic.com/engineering/contextual-retrieval) / RAGAS 공식 문서 | 실패율 감소 수치, 평가 지표 이름 |
+| 메타데이터 | [OpenLineage](https://openlineage.io) / [Bitol ODCS](https://bitol-io.github.io/open-data-contract-standard/latest/) | Job·Run·Dataset 모델, ODCS 구성 요소 |
+| 에이전트 | [Model Context Protocol](https://modelcontextprotocol.io) / [A2A Protocol](https://a2a-protocol.org/) | 구성 요소, LF 이관 날짜 |
+| 검색 | [Anthropic Contextual Retrieval](https://www.anthropic.com/engineering/contextual-retrieval) / [RAGAS 문서](https://docs.ragas.io/) | 실패율 감소 수치, 평가 지표 이름 |
 | Text-to-SQL | [Spider 2.0 논문](https://arxiv.org/html/2411.07763v2) | 엔터프라이즈 과제 성공률 |
-| 전환 | [AWS 마이그레이션 전략(7R)](https://docs.aws.amazon.com/prescriptive-guidance/latest/large-migration-guide/migration-strategies.html) / Martin Fowler "StranglerFigApplication" | 7R 이름과 정의, 스트랭글러 원문 |
-| 시장 예측 | [Gartner 보도자료(AI-ready 데이터)](https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk) / Gartner "agentic AI 40% canceled" | 60%·40% 예측 문구 |
+| 전환 | [AWS 마이그레이션 전략(7R)](https://docs.aws.amazon.com/prescriptive-guidance/latest/large-migration-guide/migration-strategies.html) / [Strangler Fig(Fowler)](https://martinfowler.com/bliki/StranglerFigApplication.html) | 7R 이름과 정의, 스트랭글러 원문 |
+| 시장 예측 | [Gartner 보도자료(AI-ready 데이터)](https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk) / [Gartner 보도자료(에이전틱 AI)](https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027) | 60%·40% 예측 문구 |
 
 **검색 팁**: 한국어 공식 자료는 "기관명 + 보도자료 + 키워드", 영문 표준은 "공식 프로젝트명 + spec" 조합이 빠르다. 예: "금융위원회 보도자료 망분리 로드맵", "iceberg spec deletion vectors".
 
 ## A. 데이터 구조·레이크하우스
 
 ### A1. 품질 점검을 통과한 데이터인데도 AI 모델 성능이 낮다면, AI-ready 데이터 관점에서 원인과 대응은?
+
+> **참고 링크**: [Gartner: AI-ready 데이터(2025.2)](https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk) · [EU AI Act 원문(EUR-Lex)](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng)
 
 **포인트**: 품질은 용도에 따라 달라진다(fitness for use).
 
@@ -66,6 +70,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 ### A2. DW와 데이터 레이크를 운영 중인 고객에게 레이크하우스를 제안한다면, 도입 근거와 도입하지 말아야 할 조건은?
 
+> **참고 링크**: [Lakehouse 논문(CIDR 2021)](https://www.cidrdb.org/cidr2021/papers/cidr2021_paper17.pdf) · [Wikipedia: Data warehouse](https://en.wikipedia.org/wiki/Data_warehouse) · [Wikipedia: Data lake](https://en.wikipedia.org/wiki/Data_lake)
+
 **포인트**: 장점만이 아니라 적용 한계까지 따진다.
 
 **핵심**: 정형·비정형을 한 벌의 데이터로 여러 엔진이 공유해야 할 때 도입하고, 정형 BI만 있다면 기존 DW 유지가 합리적이다.
@@ -78,6 +84,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 **확인할 출처**: Lakehouse 논문(Armbrust 외, CIDR 2021) 제목과 연도.
 
 ### A3. 망분리 금융사의 온프레미스 레이크하우스 표준 테이블 포맷으로 Iceberg·Delta·Hudi 중 무엇을 골라야 하나?
+
+> **참고 링크**: [Iceberg 테이블 사양](https://iceberg.apache.org/spec/) · [Iceberg REST 카탈로그 사양](https://iceberg.apache.org/rest-catalog-spec/) · [Delta Lake](https://delta.io/) · [Apache Hudi](https://hudi.apache.org/) · [Polaris TLP 졸업 공지(2026.2)](https://polaris.apache.org/blog/2026/02/19/apache-polaris-graduates-to-top-level-project/)
 
 **포인트**: 선택 기준을 고객 조건에 연결한다.
 
@@ -96,6 +104,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 ### A4. 운영계 RDBMS, MPP(Greenplum), 오픈 테이블 포맷의 역할은 어떻게 나눠야 하나?
 
+> **참고 링크**: [Wikipedia: Greenplum](https://en.wikipedia.org/wiki/Greenplum) · [Cloudberry 프로젝트 연혁](https://cloudberry.apache.org/docs/introduction/cloudberry-history) · [Iceberg 테이블 사양](https://iceberg.apache.org/spec/)
+
 **포인트**: "OTF로 다 바꾼다"는 함정을 피한다.
 
 **핵심**: 트랜잭션은 RDBMS, 고동시성 정형 분석은 MPP, 대용량·다중 엔진·AI 데이터는 OTF에 두고 진실의 원천은 OTF로 한다.
@@ -108,6 +118,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 **확인할 출처**: Greenplum 폐쇄 전환 시점(2024.5)과 Cloudberry 인큐베이팅 상태.
 
 ### A5. Greenplum 오픈소스 버전을 쓰는 고객에게는 어떤 전략 옵션이 있고, 무엇을 권할까?
+
+> **참고 링크**: [Apache Cloudberry](https://cloudberry.apache.org/) · [Cloudberry 프로젝트 연혁](https://cloudberry.apache.org/docs/introduction/cloudberry-history)
 
 **포인트**: OSS 지속성 리스크를 의사결정에 반영한다.
 
@@ -125,6 +137,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 ### A6. Iceberg 테이블 조회가 점점 느려진다면 원인과 대응은?
 
+> **참고 링크**: [Iceberg 유지보수 가이드](https://iceberg.apache.org/docs/latest/maintenance/) · [Iceberg Spark 프로시저](https://iceberg.apache.org/docs/latest/spark-procedures/)
+
 **포인트**: 운영 경험 기반 트러블슈팅.
 
 **핵심**: 대부분 작은 파일·삭제 파일·메타데이터 누적 문제이므로, 테이블 유지보수를 운영 SLA로 정의한다.
@@ -137,6 +151,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 **확인할 출처**: Iceberg 유지보수 프로시저 이름(Spark procedures 문서).
 
 ### A7. 온프레미스 S3 호환 객체 스토리지(Ceph, MinIO, 상용 어플라이언스, VAST Data 등)는 어떻게 골라야 하나?
+
+> **참고 링크**: [Ceph Object Gateway 문서](https://docs.ceph.com/en/latest/radosgw/) · [MinIO GitHub 저장소](https://github.com/minio/minio) · [AWS S3 Object Lock(WORM)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html) · [VAST Data](https://www.vastdata.com/)
 
 **포인트**: 성능보다 지속성·호환·보안 기준을 먼저 본다.
 
@@ -154,6 +170,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 ### B1. 기술 카탈로그와 비즈니스 메타데이터 플랫폼을 하나로 통합하자는 요구, 받아들여야 할까?
 
+> **참고 링크**: [Iceberg REST 카탈로그 사양](https://iceberg.apache.org/rest-catalog-spec/) · [Apache Polaris](https://polaris.apache.org/) · [Unity Catalog](https://www.unitycatalog.io/)
+
 **포인트**: 분리해야 하는 이유를 메커니즘으로 설명한다.
 
 **핵심**: 화면(조회 경험)은 통합하되, 시스템은 분리한다. 일관성 요구·장애 반경·소유 주체가 다르기 때문이다.
@@ -166,6 +184,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 **확인할 출처**: Iceberg REST Catalog 사양 / Polaris 기능 범위.
 
 ### B2. 메타데이터 관리 시스템을 구축했는데 현업이 쓰지 않는다면 원인과 개선 방안은?
+
+> **참고 링크**: [OpenLineage](https://openlineage.io/) · [OpenLineage 객체 모델](https://openlineage.io/docs/spec/object-model)
 
 **포인트**: 능동형 메타데이터 개념의 실무 적용.
 
@@ -180,6 +200,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 ### B3. 데이터 계약(Data Contract)은 무엇으로 구성되고, 어디에 적용하나?
 
+> **참고 링크**: [Open Data Contract Standard(ODCS)](https://bitol-io.github.io/open-data-contract-standard/latest/)
+
 **포인트**: 데이터 계약은 문서가 아니라 집행 장치다.
 
 **핵심**: 데이터 계약은 생산자–소비자 간 스키마·품질·SLA·책임의 기계 판독형 합의이며, CI/CD 게이트에서 집행해야 효과가 난다.
@@ -192,6 +214,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 **확인할 출처**: Bitol ODCS 최신 버전과 주요 섹션 이름.
 
 ### B4. 그룹사 데이터 조직에는 데이터 메시와 데이터 패브릭 중 어느 접근이 맞나?
+
+> **참고 링크**: [Data Mesh 원칙(Fowler)](https://martinfowler.com/articles/data-mesh-principles.html)
 
 **포인트**: 조직 현실을 반영한 판단.
 
@@ -210,6 +234,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 ### B5. 시맨틱 레이어, 온톨로지, 지식그래프는 어떻게 다르고, 언제 무엇을 쓰나?
 
+> **참고 링크**: [Wikipedia: Semantic layer](https://en.wikipedia.org/wiki/Semantic_layer) · [Wikipedia: Ontology](https://en.wikipedia.org/wiki/Ontology_%28information_science%29) · [Wikipedia: Knowledge graph](https://en.wikipedia.org/wiki/Knowledge_graph) · [dbt Labs: Open Semantic Interchange](https://www.getdbt.com/blog/the-osi-spec-updates) · [ISO/IEC 39075 GQL](https://www.iso.org/standard/76120.html)
+
 **포인트**: 용어를 혼동하지 않고 용도별로 배치한다.
 
 **핵심**: 정량 지표 질의는 시맨틱 레이어, 개념·관계 추론은 온톨로지와 지식그래프로 배치한다.
@@ -222,6 +248,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 **확인할 출처**: Open Semantic Interchange(Apache Ossie) 현황 / GQL 표준 번호(ISO/IEC 39075).
 
 ### B6. 데이터 거버넌스와 AI 거버넌스를 통합하는 조직·프로세스는 어떻게 설계하나?
+
+> **참고 링크**: [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) · [ISO/IEC 42001](https://www.iso.org/standard/42001)
 
 **포인트**: 규제·표준을 운영 체계로 연결한다.
 
@@ -238,6 +266,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 ### C1. 사내 RAG의 답변 정확도가 낮다는 불만이 많다면 어떻게 진단하고 개선하나?
 
+> **참고 링크**: [Anthropic: Contextual Retrieval](https://www.anthropic.com/engineering/contextual-retrieval) · [Lost in the Middle 논문](https://arxiv.org/abs/2307.03172) · [RAGAS 문서](https://docs.ragas.io/)
+
 **포인트**: 검색 실패와 생성 실패를 분리한다.
 
 **핵심**: 정답 근거가 검색 결과에 들어왔는지부터 계측해 검색 문제와 생성 문제를 분리하고, 골든셋으로 한 번에 한 변수씩 개선한다.
@@ -250,6 +280,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 **확인할 출처**: Anthropic Contextual Retrieval의 실패율 감소 수치(49%, 67%) / RAGAS 지표 이름.
 
 ### C2. 하이브리드 검색과 리랭킹을 포함한 검색 파이프라인은 어떻게 설계하나?
+
+> **참고 링크**: [Wikipedia: Okapi BM25](https://en.wikipedia.org/wiki/Okapi_BM25) · [RRF 원 논문(SIGIR 2009)](https://doi.org/10.1145/1571941.1572114) · [Sentence Transformers: Cross-Encoder](https://www.sbert.net/examples/applications/cross-encoder/README.html) · [Anthropic: Contextual Retrieval](https://www.anthropic.com/engineering/contextual-retrieval)
 
 **포인트**: 각 단계가 왜 필요한지 이해한다.
 
@@ -264,6 +296,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 ### C3. 문서 유형별(규정집, 상품설명서, 회의록, 표 중심 보고서) 청킹은 어떻게 해야 하나?
 
+> **참고 링크**: [Anthropic: Contextual Retrieval](https://www.anthropic.com/engineering/contextual-retrieval) · [RAG 서베이(Gao 외, 2023)](https://arxiv.org/abs/2312.10997)
+
 **포인트**: 고정 길이 청킹의 한계.
 
 **핵심**: 문서 구조를 보존하는 단위로 자르고, 고정 길이는 마지막 수단으로 쓴다.
@@ -275,6 +309,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 - 공통: 청크 앞 문서 맥락 부착, 오버랩 10~20%, 평가로 크기 조정.
 
 ### C4. 경영진용 자연어 질의 서비스에는 Text-to-SQL과 시맨틱 레이어 경유 중 무엇이 맞나?
+
+> **참고 링크**: [Spider 2.0 논문(ICLR 2025)](https://arxiv.org/abs/2411.07763) · [dbt MetricFlow](https://docs.getdbt.com/docs/build/about-metricflow)
 
 **포인트**: 정확성·통제 관점의 판단.
 
@@ -289,6 +325,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 ### C5. 권한 인지형(Permission-aware) RAG는 어떻게 설계하나?
 
+> **참고 링크**: [Wikipedia: RBAC](https://en.wikipedia.org/wiki/Role-based_access_control) · [OWASP Top 10 for LLM](https://genai.owasp.org/llm-top-10/)
+
 **포인트**: 권한을 어느 단계에서 강제하는가.
 
 **핵심**: 권한은 생성 단계가 아니라 검색 단계에서 사전 필터로 강제하고, 원천 시스템 ACL을 인덱스 메타데이터로 동기화한다.
@@ -302,6 +340,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 ### C6. RAG·에이전트 평가 체계와 운영 KPI는 어떻게 설계하나?
 
+> **참고 링크**: [RAGAS 문서](https://docs.ragas.io/)
+
 **포인트**: 확률적 시스템의 품질을 계약 가능한 지표로 바꾼다.
 
 **핵심**: 오프라인(골든셋), 온라인(로그·피드백), 위험(레드팀) 3층 평가를 배포 게이트에 연결한다.
@@ -314,6 +354,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 **확인할 출처**: RAGAS 공식 문서의 지표 정의.
 
 ### C7. MCP와 A2A는 어떻게 다르고, 엔터프라이즈에 도입할 때 보안은 어떻게 고려하나?
+
+> **참고 링크**: [Model Context Protocol](https://modelcontextprotocol.io/) · [Anthropic: MCP의 Agentic AI Foundation 기증](https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation) · [A2A Protocol](https://a2a-protocol.org/)
 
 **포인트**: 표준의 위치와 보안 경계.
 
@@ -331,6 +373,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 ### C8. 고객이 "전사 AI 에이전트 100개 구축"을 요구한다면 범위와 거버넌스는 어떻게 잡아야 하나?
 
+> **참고 링크**: [Gartner: 에이전틱 AI 40% 취소 예측(2025.6)](https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027)
+
 **포인트**: 숫자 목표보다 가치·위험 기반 판단.
 
 **핵심**: 개수가 아니라 가치·실현성·위험 3축으로 우선순위를 매기고, 에이전트 레지스트리와 수명주기 관리를 먼저 세운다.
@@ -345,6 +389,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 ### D1. 레거시 DW(Teradata·Exadata)를 전환할 때 7R 관점에서 어떤 전략 조합이 좋을까?
 
+> **참고 링크**: [AWS: 마이그레이션 전략(7R)](https://docs.aws.amazon.com/prescriptive-guidance/latest/large-migration-guide/migration-strategies.html)
+
 **포인트**: 전략은 워크로드 단위로 고른다.
 
 **핵심**: 7R은 시스템 전체가 아니라 워크로드 단위로 고르며, DW는 'Retire(미사용) + Replatform(대다수) + Refactor(핵심 마트)' 조합이 일반적이다.
@@ -357,6 +403,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 **확인할 출처**: AWS 7R 정의(특히 Refactor가 대규모 이관에 권장되지 않는다는 문구).
 
 ### D2. 스트랭글러 패턴을 데이터 플랫폼 전환에 어떻게 적용하나?
+
+> **참고 링크**: [Strangler Fig(Fowler)](https://martinfowler.com/bliki/StranglerFigApplication.html)
 
 **포인트**: 웹 애플리케이션 패턴을 데이터 영역으로 옮겨 설계한다.
 
@@ -371,6 +419,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 ### D3. CDC 기반 이관과 병행 운영·컷오버는 어떻게 계획하나?
 
+> **참고 링크**: [Debezium 문서](https://debezium.io/documentation/reference/stable/index.html) · [Wikipedia: Change data capture](https://en.wikipedia.org/wiki/Change_data_capture)
+
 **포인트**: 차세대 사업 경험의 구조화.
 
 **핵심**: 초기 적재, CDC 증분, 정합성 자동 검증, 리허설 2회 이상, 롤백 기준이 컷오버 계획의 다섯 기둥이다.
@@ -381,6 +431,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 - 컷오버: 동결 시점, Go/No-Go 체크리스트, 롤백 트리거(정합성 오류율·배치 SLA 초과)와 소요 시간.
 
 ### D4. Hadoop(Cloudera) 기반 빅데이터 플랫폼은 어떤 전략으로 전환하나?
+
+> **참고 링크**: [Iceberg Hive 마이그레이션](https://iceberg.apache.org/docs/latest/hive-migration/) · [Iceberg Spark 프로시저](https://iceberg.apache.org/docs/latest/spark-procedures/)
 
 **포인트**: 저장 계층과 연산 계층을 분리해 단계화한다.
 
@@ -393,6 +445,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 **확인할 출처**: Iceberg의 Hive 테이블 마이그레이션 프로시저(migrate, snapshot).
 
 ### D5. 온프레미스 레이크하우스, 퍼블릭 클라우드, 기존 MPP 유지의 5년 TCO는 어떻게 비교하나?
+
+> **참고 링크**: [FinOps Foundation](https://www.finops.org/)
 
 **포인트**: 숨은 비용과 결론을 바꾸는 변수.
 
@@ -409,6 +463,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 ### D6. DataOps, MLOps, LLMOps는 어떻게 다르고, 통합 운영 체계는 어떻게 만드나?
 
+> **참고 링크**: [Wikipedia: MLOps](https://en.wikipedia.org/wiki/MLOps)
+
 **포인트**: 관리 대상의 확장.
 
 **핵심**: 관리 대상이 데이터 → 모델 → LLM 애플리케이션으로 넓어지며, 공통 기반(CI/CD·관측·카탈로그)을 공유하는 통합 체계가 효율적이다.
@@ -422,6 +478,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 규제는 조문 번호·날짜·수치가 자주 바뀌어 **가장 틀리기 쉬운 영역**이다. 답의 골격은 아래를 참고하되, 조문 번호·날짜·수치는 반드시 원문으로 확인한다.
 
 ### E1. AI 기본법의 주요 의무는 SI 사업 산출물에 어떻게 반영하나?
+
+> **참고 링크**: [AI 기본법(국가법령정보센터)](https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5%EB%B0%9C%EC%A0%84%EA%B3%BC%EC%8B%A0%EB%A2%B0%EA%B8%B0%EB%B0%98%EC%A1%B0%EC%84%B1%EB%93%B1%EC%97%90%EA%B4%80%ED%95%9C%EA%B8%B0%EB%B3%B8%EB%B2%95)
 
 **포인트**: 법 조문을 설계·검수 산출물로 바꾼다.
 
@@ -437,6 +495,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 ### E2. 금융사가 망분리 환경에서 생성형 AI 상담 지원 시스템을 원한다면 아키텍처와 규제 대응은?
 
+> **참고 링크**: [금융위: 망분리 개선 로드맵(2024.8)](https://www.fsc.go.kr/no010101/82885) · [금융위: 금융권 AI 활용 지원(2024.12)](https://www.fsc.go.kr/no010101/83594) · [금융위: SaaS 망분리 규제 개선(2026.1)](https://www.fsc.go.kr/no010101/86080) · [금융위: AI 관련 망분리 완화(2026.5)](https://www.fsc.go.kr/no010101/86972) · [금융위: 제2차 망분리 긴급 완화(2026.9)](https://www.fsc.go.kr/no010101/87646)
+
 **포인트**: 최신 규제 완화 흐름을 아키텍처에 반영한다.
 
 **핵심**: 개인신용정보를 다루는 업무는 내부망 설치형 모델, 일반 지식 업무는 규제 예외 범위 안의 외부 AI로 나누는 이원 구조를 제안한다.
@@ -448,6 +508,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 **확인할 출처(필수)**: 금융위 보도자료에서 각 조치의 날짜와 허용 범위, 2026년 이후 최신 완화 조치.
 
 ### E3. 생성형 AI를 구축할 때 개인정보보호법상 쟁점과 대응은?
+
+> **참고 링크**: [개인정보위: 생성형 AI 개인정보 처리 안내서(2025.8)](https://www.pipc.go.kr/np/cop/bbs/selectBoardArticle.do?bbsId=BS074&mCode=C020010000&nttId=11410) · [Wikipedia: Pseudonymization](https://en.wikipedia.org/wiki/Pseudonymization)
 
 **포인트**: 개인정보위 안내서의 구조를 따른다.
 
@@ -462,6 +524,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 ### E4. 공공기관 RAG 사업에서 CSAP 등급과 데이터 보안 등급을 고려하면 배치를 어떻게 설계하나?
 
+> **참고 링크**: [클라우드컴퓨팅서비스 보안인증에 관한 고시](https://www.law.go.kr/%ED%96%89%EC%A0%95%EA%B7%9C%EC%B9%99/%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C%EC%BB%B4%ED%93%A8%ED%8C%85%EC%84%9C%EB%B9%84%EC%8A%A4%EB%B3%B4%EC%95%88%EC%9D%B8%EC%A6%9D%EC%97%90%EA%B4%80%ED%95%9C%EA%B3%A0%EC%8B%9C)
+
 **포인트**: 데이터 등급별 인프라 배치 판단.
 
 **핵심**: 데이터 중요도에 따라 공개 데이터는 민간 클라우드, 비공개 업무는 중 등급, 민감·행정 내부는 상 등급 또는 자체 구축으로 배치한다.
@@ -473,6 +537,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 **확인할 출처(필수)**: CSAP 상·중·하 등급 기준 / 공공부문 초거대 AI 가이드라인 최신판.
 
 ### E5. LLM·RAG 시스템의 보안 위협과 대응은?
+
+> **참고 링크**: [OWASP Top 10 for LLM](https://genai.owasp.org/llm-top-10/)
 
 **포인트**: 위협을 지점별 방어로 구조화한다.
 
@@ -493,6 +559,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 ### F1. AI·데이터 플랫폼 사업의 요구사항 정의는 기존 SI와 어떻게 달라야 하나?
 
+> **참고 링크**: [RAGAS 문서](https://docs.ragas.io/) · [AI 기본법(국가법령정보센터)](https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5%EB%B0%9C%EC%A0%84%EA%B3%BC%EC%8B%A0%EB%A2%B0%EA%B8%B0%EB%B0%98%EC%A1%B0%EC%84%B1%EB%93%B1%EC%97%90%EA%B4%80%ED%95%9C%EA%B8%B0%EB%B3%B8%EB%B2%95)
+
 **포인트**: 확률적 시스템의 검수 기준을 계약 언어로 바꾼다.
 
 **핵심**: 기능 명세가 아니라 품질 목표(정확도·지연·비용)와 측정 방법으로 요구사항을 정의해야 검수 분쟁을 막는다.
@@ -503,6 +571,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 - 산출물: 유스케이스 정의서, 골든셋 구축 계획, 평가 계획서, 데이터 제공 확약, 위험관리 계획.
 
 ### F2. PoC는 성공했는데 본사업에서 성능이 떨어졌다면 원인과 PoC 설계 원칙은?
+
+> **참고 링크**: [Gartner: 생성형 AI PoC 후 포기 예측(2024.7)](https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025)
 
 **포인트**: PoC와 운영 조건의 차이.
 
@@ -515,6 +585,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 ### F3. Iceberg 표준 채택 같은 아키텍처 결정은 고객에게 어떻게 문서화하고 설득하나?
 
+> **참고 링크**: [ADR(adr.github.io)](https://adr.github.io/) · [Nygard: Documenting Architecture Decisions](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)
+
 **포인트**: 의사결정 근거를 남기는 방식.
 
 **핵심**: ADR(Architecture Decision Record)로 맥락·선택지·평가기준·결정·트레이드오프를 남기고, PoC 수치와 리스크 비용으로 설득한다.
@@ -525,6 +597,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 ### F4. AI 플랫폼 사업의 비용 산정과 인력 계획은 어떻게 세우나?
 
+> **참고 링크**: [FinOps Foundation](https://www.finops.org/)
+
 **포인트**: 기존 FP 방식으로 잡히지 않는 공수.
 
 **핵심**: 구축, 데이터 준비, GPU 인프라, 운영 튜닝을 분리 산정하고, 데이터·ML/LLM·도메인 전문가·보안 인력을 균형 배치한다.
@@ -534,6 +608,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 - 인력: 현업 SME 투입 확약, LLMOps·평가·보안 핵심 역할은 사내 전문가 풀로 확보.
 
 ### F5. AI 플랫폼 구축 사업의 품질·리스크 관리 체계는 어떻게 만드나?
+
+> **참고 링크**: [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) · [ISO/IEC 42001](https://www.iso.org/standard/42001)
 
 **포인트**: 품질 게이트와 리스크 범주의 구조화.
 
@@ -550,6 +626,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 
 ### F6. [시나리오] 제조사 고객이 "공장 설비 매뉴얼·정비 이력으로 정비 지원 에이전트를 만들어 달라"고 한다면 데이터 구조와 검색은 어떻게 설계하나?
 
+> **참고 링크**: [GraphRAG 논문](https://arxiv.org/abs/2404.16130) · [Wikipedia: Knowledge graph](https://en.wikipedia.org/wiki/Knowledge_graph) · [dbt MetricFlow](https://docs.getdbt.com/docs/build/about-metricflow)
+
 **포인트**: 정형·비정형 결합 설계를 실제 업무에 적용한다.
 
 **핵심**: 매뉴얼은 RAG, 정비 이력은 정형 질의, 설비 간 관계는 지식그래프로 나누고 에이전트가 질의 유형별로 라우팅한다.
@@ -560,6 +638,8 @@ tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 규제]
 - 운영: 현장 단말 오프라인 대응, 정비사 피드백을 골든셋으로 축적.
 
 ### F7. [시나리오] "AI 도입 전에 데이터부터 정비하라"는 컨설팅 결과를 받은 고객사가 무엇부터 할지 묻는다면, 첫 6개월 실행 계획은?
+
+> **참고 링크**: [Gartner: AI-ready 데이터(2025.2)](https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk)
 
 **포인트**: 범위를 좁혀 가치를 먼저 낸다.
 
