@@ -1,10 +1,10 @@
 ---
-title: "사내 기술인증 대비: AI 기반 엔터프라이즈 데이터 구조·검색·플랫폼 전환 설계 예상 문항과 모범 답안"
+title: "AI 기반 엔터프라이즈 데이터 구조·검색·플랫폼 전환 설계 예상 문항과 모범 답안"
 layout: single
 toc: true
 published: true
 categories: 데이터플랫폼
-tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스, 기술인증]
+tags: [AI, 데이터플랫폼, 레이크하우스, RAG, 거버넌스]
 ---
 
 > 한국 SI 대기업 관점, PPT 답안형으로 정리했습니다. 개념 배경은 [엔터프라이즈 AI를 위한 차세대 데이터 구조…]({% post_url 2026-10-13-enterprise-ai-data-platform-overview %})(개요판)와 [AI 기반 엔터프라이즈 데이터 구조·검색·플랫폼 전환 설계]({% post_url 2026-10-13-ai-enterprise-data-platform-migration-design %})(상세판)를 참고하세요.
